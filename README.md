@@ -1,24 +1,8 @@
-![nuxt-ui-saas-social-card](https://github.com/nuxt-ui-pro/saas/assets/739984/50bf4ddd-c4d5-47e5-a09e-0f699513dfb5)
-
-# Nuxt UI Pro - SaaS template
-
-[![Nuxt UI Pro](https://img.shields.io/badge/Made%20with-Nuxt%20UI%20Pro-00DC82?logo=nuxt.js&labelColor=020420)](https://ui.nuxt.com/pro)
-
-- [Live demo](https://saas-template.nuxt.dev/)
-- [Play on Stackblitz](https://stackblitz.com/github/nuxt-ui-pro/saas)
-- [Documentation](https://ui.nuxt.com/pro/getting-started)
-
-## Quick Start
-
-```bash [Terminal]
-npx nuxi init -t github:nuxt-ui-pro/saas
-```
-
 ## Setup
 
 Make sure to install the dependencies:
 
-```bash
+```bash {"id":"01J4NN5HP192K7QCN4JMMA57S7"}
 # npm
 npm install
 
@@ -36,7 +20,7 @@ bun install
 
 Start the development server on `http://localhost:3000`:
 
-```bash
+```bash {"id":"01J4NN5HP32SF15SJE3JCZW5J2"}
 # npm
 npm run dev
 
@@ -54,7 +38,7 @@ bun run dev
 
 Build the application for production:
 
-```bash
+```bash {"id":"01J4NN5HP32SF15SJE3KDMJ437"}
 # npm
 npm run build
 
@@ -70,7 +54,7 @@ bun run build
 
 Locally preview production build:
 
-```bash
+```bash {"id":"01J4NN5HP32SF15SJE3PMP04GE"}
 # npm
 npm run preview
 
@@ -90,7 +74,7 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 
 Add `@nuxthq/studio` dependency to your package.json:
 
-```bash
+```bash {"id":"01J4NN5HP32SF15SJE3T4D5WCJ"}
 # npm
 npm install --save-dev @nuxthq/studio
 
@@ -106,7 +90,7 @@ bun add -d @nuxthq/studio
 
 Add this module to your `nuxt.config.ts`:
 
-```ts
+```ts {"id":"01J4NN5HP32SF15SJE3VWDNGAJ"}
 export default defineNuxtConfig({
   ...
   modules: [

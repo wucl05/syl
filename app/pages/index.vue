@@ -1,21 +1,20 @@
 <script setup lang="ts">
-const { data: page } = await useAsyncData('index', () => queryContent('/').findOne())
-if (!page.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
-}
-
-useSeoMeta({
-  titleTemplate: '',
-  title: page.value.title,
-  ogTitle: page.value.title,
-  description: page.value.description,
-  ogDescription: page.value.description
-})
+import langue from '@/locales/home.js'
+const { locale } = useI18n()
+watch(locale, (val) => {
+  useSeoMeta({
+    titleTemplate: '',
+    title: langue[val].title,
+    ogTitle: langue[val].title,
+    description: langue[val].description,
+    ogDescription: langue[val].description
+  })
+}, { immediate: true })
 </script>
-
 <template>
-  <div v-if="page">
-    <ULandingHero
+  <div>
+    <SlideshowContainer />
+    <!-- <ULandingHero
       :title="page.hero.title"
       :description="page.hero.description"
       :links="page.hero.links"
@@ -50,61 +49,35 @@ useSeoMeta({
           />
         </UBadge>
       </template>
-    </ULandingHero>
+</ULandingHero>
 
-    <ULandingSection class="!pt-0">
-      <ImagePlaceholder />
-    </ULandingSection>
+<ULandingSection class="!pt-0">
+  <ImagePlaceholder />
+</ULandingSection>
 
-    <ULandingSection
-      v-for="(section, index) in page.sections"
-      :key="index"
-      :title="section.title"
-      :description="section.description"
-      :align="section.align"
-      :features="section.features"
-    >
-      <ImagePlaceholder />
-    </ULandingSection>
+<ULandingSection v-for="(section, index) in page.sections" :key="index" :title="section.title"
+  :description="section.description" :align="section.align" :features="section.features">
+  <ImagePlaceholder />
+</ULandingSection>
 
-    <ULandingSection
-      :title="page.features.title"
-      :description="page.features.description"
-    >
-      <UPageGrid>
-        <ULandingCard
-          v-for="(item, index) in page.features.items"
-          :key="index"
-          v-bind="item"
-        />
-      </UPageGrid>
-    </ULandingSection>
+<ULandingSection :title="page.features.title" :description="page.features.description">
+  <UPageGrid>
+    <ULandingCard v-for="(item, index) in page.features.items" :key="index" v-bind="item" />
+  </UPageGrid>
+</ULandingSection>
 
-    <ULandingSection
-      :headline="page.testimonials.headline"
-      :title="page.testimonials.title"
-      :description="page.testimonials.description"
-    >
-      <UPageColumns class="xl:columns-4">
-        <div
-          v-for="(testimonial, index) in page.testimonials.items"
-          :key="index"
-          class="break-inside-avoid"
-        >
-          <ULandingTestimonial
-            v-bind="testimonial"
-            class="bg-gray-100/50 dark:bg-gray-800/50"
-          />
-        </div>
-      </UPageColumns>
-    </ULandingSection>
+<ULandingSection :headline="page.testimonials.headline" :title="page.testimonials.title"
+  :description="page.testimonials.description">
+  <UPageColumns class="xl:columns-4">
+    <div v-for="(testimonial, index) in page.testimonials.items" :key="index" class="break-inside-avoid">
+      <ULandingTestimonial v-bind="testimonial" class="bg-gray-100/50 dark:bg-gray-800/50" />
+    </div>
+  </UPageColumns>
+</ULandingSection>
 
-    <ULandingSection>
-      <ULandingCTA
-        v-bind="page.cta"
-        class="bg-gray-100/50 dark:bg-gray-800/50"
-      />
-    </ULandingSection>
+<ULandingSection>
+  <ULandingCTA v-bind="page.cta" class="bg-gray-100/50 dark:bg-gray-800/50" />
+</ULandingSection> -->
   </div>
 </template>
 
@@ -115,6 +88,7 @@ useSeoMeta({
     linear-gradient(to right, rgb(var(--color-gray-200)) 1px, transparent 1px),
     linear-gradient(to bottom, rgb(var(--color-gray-200)) 1px, transparent 1px);
 }
+
 .dark {
   .landing-grid {
     background-image:

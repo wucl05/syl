@@ -10,8 +10,17 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxthq/studio',
     '@vueuse/nuxt',
-    'nuxt-og-image'
+    'nuxt-og-image',
+    "@nuxtjs/i18n",
+    "@nuxtjs/tailwindcss"
   ],
+
+  i18n: {
+    vueI18n: './i18n.config.ts' // if you are using custom path, default
+  },
+  css: ['~/assets/css/tailwind.css',"animate.css"],
+  tailwindcss: {
+  },
 
   hooks: {
     // Define `@nuxt/ui` components as global to use them in `.md` (feel free to add those you need)

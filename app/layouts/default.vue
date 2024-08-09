@@ -5,23 +5,19 @@ const { data: navigation } = await useAsyncData('navigation', () => fetchContent
 const { data: files } = useLazyFetch<ParsedContent[]>('/api/search.json', { default: () => [], server: false })
 
 provide('navigation', navigation)
+const loading = ref(false)
+const loadHandler = () => {
+  console.log('加载成功啦')
+  loading.value = true
+}
 </script>
 
 <template>
   <div>
-    <AppHeader />
-
-    <UMain>
+    <PageLoading v-if="!loading" @success="loadHandler" />
+    <div v-if="loading">
+      <AppHeader />
       <slot />
-    </UMain>
-
-    <AppFooter />
-
-    <ClientOnly>
-      <LazyUContentSearch
-        :files="files"
-        :navigation="navigation"
-      />
-    </ClientOnly>
+    </div>
   </div>
 </template>
