@@ -99,6 +99,6 @@ const change = (index) => {
 }
 
 .ani {
-  animation: w_full 10s linear forwards;
+  animation: w_full 5s ease-out forwards;
 }
 </style>

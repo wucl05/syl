@@ -12,18 +12,18 @@ const timeLine = async () => {
   animateCss({
     element: layerTitle.value,
     animationName: "animate__fadeInUp",
-    sleep:100
+    sleep: 100
   })
   animateCss({
     element: layerDes.value,
     animationName: "animate__fadeInUp",
-    sleep:200
+    sleep: 200
   })
   await Promise.all([
     addAnimate({
       element: layerS6.value,
       styles: {
-        animation: "scale_1_9 1s linear forwards",
+        animation: "scale_1_9 1s ease-out forwards",
       },
       hide: true
     })
@@ -62,7 +62,7 @@ watch(active, (val) => {
     <div class="absolute w-full h-full col fac z-50 pt-28 text-white"
       :style="{ color: [1].includes(active) ? '#000' : '#fff' }">
       <div class="title  text-4xl font-bold	" ref="layerTitle">
-        {{langue[locale].title}}
+        {{ langue[locale].title }}
       </div>
       <div ref="layerDes" class="col fc">
         <div class="des mt-4 text-sm w-9/12 text-center	">
@@ -77,6 +77,6 @@ watch(active, (val) => {
 </template>
 <style scoped>
 .ani {
-  animation: opacityShow 1s linear forwards;
+  animation: opacityShow 1s ease-out forwards;
 }
 </style>
