@@ -15,7 +15,7 @@ const items = [[
 ]]
 </script>
 <template>
-  <div class="row fixed w-full z-10 text-white px-5 lg:px-12 py-3.5 fac text-sm	">
+  <div class="row fixed w-full z-50 text-white px-5 lg:px-12 py-3.5 fac text-sm	">
     <div class="row fac">
       <svg width="71.888" height="28" viewBox="0 0 71.888 28" style="fill: white;">
         <defs></defs>
