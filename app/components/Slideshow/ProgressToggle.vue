@@ -24,6 +24,7 @@ const { items } = defineProps({
 const progressRefs = ref([])
 const model = defineModel({ default: 0 })
 const normal = ref(true)
+const itemRefs = ref([])
 const timeLine = async () => {
   normal.value = false
   nextTick(async () => {
@@ -51,6 +52,21 @@ const timeLine = async () => {
 
 onMounted(async () => {
   timeLine()
+  nextTick(() => {
+    itemRefs.value.forEach((em, index) => {
+      setTimeout(() => {
+        animateCss({
+          element: em,
+          animationName: "animate__fadeInUp",
+          sleep: 100,
+          callback: (em) => {
+            em.style.opacity = 1
+          }
+        })
+      }, (index * 500) + 500)
+
+    })
+  })
 })
 const change = (index) => {
   index !== model.value && setTimeout(() => timeLine(), 0)
@@ -60,8 +76,8 @@ const change = (index) => {
 </script>
 <template>
   <div class="row">
-    <div @click="change(index)" v-for="(item, index) in items" :class="{ active: model === index }"
-      class="text-white row fc cursor-pointer hover:bg-[rgba(0,0,0,0.3)] rounded-md" :key="index">
+    <div ref="itemRefs" @click="change(index)" v-for="(item, index) in items" :class="{ active: model === index }"
+      class="text-white row fc cursor-pointer hover:bg-[rgba(0,0,0,0.3)] rounded-md opacity-0" :key="index">
       <div class="text-center p-10">
         <div class="text-base font-bold">
           {{ item.title }}

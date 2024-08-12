@@ -11,11 +11,13 @@ const layerDes = ref(null)
 const timeLine = async () => {
   animateCss({
     element: layerTitle.value,
-    animationName: "animate__fadeInUp"
+    animationName: "animate__fadeInUp",
+    sleep:100
   })
   animateCss({
-    element: layerTitle.value,
-    animationName: "animate__fadeInUp"
+    element: layerDes.value,
+    animationName: "animate__fadeInUp",
+    sleep:200
   })
   await Promise.all([
     addAnimate({

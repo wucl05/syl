@@ -23,16 +23,19 @@ export const waitForVideoLoad = async (videoUrl) => {
 
 }
 
-export const animateCss = async ({ element, animationName, amimateionDefaultName = 'animate__animated' }) => {
+export const animateCss = async ({ element, animationName, sleep = 0, amimateionDefaultName = 'animate__animated',callback }) => {
     return new Promise((resolve) => {
-        const node = typeof (element) === "string" ? document.querySelector(element) : element
-        node.classList.add(amimateionDefaultName, animationName)
-        function handleAnimationEnd() {
-            node.classList.remove(amimateionDefaultName, animationName)
-            node.removeEventListener("animationend", handleAnimationEnd)
-            resolve()
-        }
-        node.addEventListener("animationend", handleAnimationEnd)
+        setTimeout(() => {
+            const node = typeof (element) === "string" ? document.querySelector(element) : element
+            node.classList.add(amimateionDefaultName, animationName)
+            function handleAnimationEnd() {
+                callback && callback(element)
+                node.classList.remove(amimateionDefaultName, animationName)
+                node.removeEventListener("animationend", handleAnimationEnd)
+                resolve()
+            }
+            node.addEventListener("animationend", handleAnimationEnd)
+        }, sleep)
     })
 }
 
