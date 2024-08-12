@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import langue from '@/locales/header.js'
 const { locale, setLocale } = useI18n()
-const active = ref(1)
+const active = ref(2)
 watch(active, (value) => {
 })
 </script>

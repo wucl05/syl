@@ -23,7 +23,7 @@ export const waitForVideoLoad = async (videoUrl) => {
 
 }
 
-export const animateCss = async (element, animationName, amimateionDefaultName = 'animate__animated') => {
+export const animateCss = async ({ element, animationName, amimateionDefaultName = 'animate__animated' }) => {
     return new Promise((resolve) => {
         const node = typeof (element) === "string" ? document.querySelector(element) : element
         node.classList.add(amimateionDefaultName, animationName)

@@ -17,7 +17,7 @@ onMounted(async () => {
             name: "PangMenZhengDaoRegular"
         }),
         await waitForVideoLoad("/videos/home.mp4"),
-        await loadImages(["y-left.png", "y-right.png", "y-top.png", "y-syl.png", "y-center.png","s1.jpg"])
+        await loadImages(["y-left.png", "y-right.png", "y-top.png", "y-syl.png", "y-center.png","s1.jpg","s3.png"])
     ]).then(() => {
         console.log('loading success');
         emit("success")

@@ -1,112 +1,80 @@
 <script setup lang="ts">
-import langue from '@/locales/first.js'
+import langue from '@/locales/second.js'
 const { locale } = useI18n()
+const layerS6 = ref(null)
+const active = ref(0)
+const layerBg0 = ref(null)
+const layerBg1 = ref(null)
+const layerBg2 = ref(null)
+const layerTitle = ref(null)
+const layerDes = ref(null)
 const timeLine = async () => {
+  animateCss({
+    element: layerTitle.value,
+    animationName: "animate__fadeInUp"
+  })
+  animateCss({
+    element: layerTitle.value,
+    animationName: "animate__fadeInUp"
+  })
   await Promise.all([
     addAnimate({
-      element: layerBack.value,
+      element: layerS6.value,
       styles: {
-        animation: "blurGrowDisappearBottom 1s linear forwards",
+        animation: "scale_1_9 1s linear forwards",
       },
       hide: true
-    }),
-    addAnimate({
-      element: layerLeft.value,
-      styles: {
-        animation: "blurGrowDisappearLeft 1.5s ease-in forwards",
-      },
-      hide: true,
-      sleep: 800
-    }),
-    addAnimate({
-      element: layerTop.value,
-      styles: {
-        animation: "blurGrowDisappearTop 1.5s ease-in forwards",
-      },
-      hide: true,
-      sleep: 800
-    }),
-    addAnimate({
-      element: layerRight.value,
-      styles: {
-        animation: "blurGrowDisappearRight 1.5s ease-in forwards",
-      },
-      hide: true,
-      sleep: 800
-    })
-  ])
-  await Promise.all([
-    addAnimate({
-      element: emTitle.value,
-      styles: {
-        animation: "fadeInMoveUp 1.2s ease-out forwards",
-      }
-    }),
-    addAnimate({
-      element: emSubTitle.value,
-      styles: {
-        animation: "fadeInMoveUp 1.2s ease-out forwards",
-      },
-      sleep: 200
-    })
-  ])
-
-  await Promise.all([
-    await addAnimate({
-      element: layerCenter.value,
-      styles: {
-        animation: "scale_9_1 0.5s ease-out forwards",
-      },
-      sleep: 2000,
-    }),
-    addAnimate({
-      element: layerSyl.value,
-      styles: {
-        animation: "opacityMoveYT20 1.5s ease-out forwards",
-      },
-      sleep: 0
-    }),
-    addAnimate({
-      element: layerSlogin.value,
-      styles: {
-        animation: "opacityQuarterIn 1.5s ease-out forwards",
-      }
-    })
-  ])
-
-  await Promise.all([
-    addAnimate({
-      element: layerCenter.value,
-      styles: {
-        animation: "opacityOut 1s ease-out forwards",
-      },
-      hide:true
-    }),
-    addAnimate({
-      element: layerSyl.value,
-      styles: {
-        animation: "opacityOut 1s ease-out forwards",
-      },
-      hide:true
-    }),
-    addAnimate({
-      element: layerSlogin.value,
-      styles: {
-        animation: "opacityOut 1s ease-out forwards",
-      },
-      hide:true
     })
   ])
 
 }
+const toggle = async (val) => {
+  const lays = [layerBg0, layerBg1, layerBg2]
+  lays.forEach(em => {
+    em.value && (em.value.style.zIndex = 40)
+  })
+  await addAnimate({
+    element: lays[val].value,
+    styles: {
+      block: true,
+      zIndex: 50,
+    },
+    css: "ani"
+  })
+}
 onMounted(async () => {
-  // timeLine()
+  timeLine()
 })
+watch(active, (val) => {
+  nextTick(() => {
+    toggle(val)
+  })
+}, { immediate: true })
 </script>
 <template>
-  <div class="w-full h-full absolute">
-    <div ref="layerS1" class="absolute layerS1 w-full h-full bgFull bg-[url('/imgs/s1.jpg')] z-30"></div>
+  <div class="w-full h-full absolute row fc">
+    <div ref="layerBg0" class="absolute w-full h-full bgFull bg-[url('/imgs/s1.jpg')] z-30"></div>
+    <div ref="layerBg1" class="absolute w-full h-full bgFull bg-[url('/imgs/s4.jpg')] z-30"></div>
+    <div ref="layerBg2" class="absolute w-full h-full bgFull bg-[url('/imgs/s5.jpg')] z-30"></div>
+    <div ref="layerS6" class="absolute w-full h-full bgFull bg-[url('/imgs/s3.png')] z-50 origin-center	"></div>
+    <div class="absolute w-full h-full col fac z-50 pt-28 text-white"
+      :style="{ color: [1].includes(active) ? '#000' : '#fff' }">
+      <div class="title  text-4xl font-bold	" ref="layerTitle">
+        {{langue[locale].title}}
+      </div>
+      <div ref="layerDes" class="col fc">
+        <div class="des mt-4 text-sm w-9/12 text-center	">
+          {{ langue[locale].des }}
+        </div>
+      </div>
+    </div>
+    <div class="absolute bottom-14 row fjc z-50 w-full">
+      <SlideshowProgressToggle v-model="active" />
+    </div>
   </div>
 </template>
 <style scoped>
+.ani {
+  animation: opacityShow 1s linear forwards;
+}
 </style>
