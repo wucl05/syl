@@ -12,9 +12,21 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     'nuxt-og-image',
     "@nuxtjs/i18n",
-    "@nuxtjs/tailwindcss"
+    "@nuxtjs/tailwindcss",
+    // "@nuxt/icon"
   ],
-
+  // icon: {
+  //   provider: 'server',
+  //   serverBundle: {
+  //     collections: ['heroicons', 'simple-icons'] // <!--- this
+  //   },
+  //   customCollections: [
+  //     {
+  //       prefix: 'my-icon',
+  //       dir: './app/assets/icons'
+  //     },
+  //   ],
+  // },
   i18n: {
     vueI18n: './i18n.config.ts' // if you are using custom path, default
   },

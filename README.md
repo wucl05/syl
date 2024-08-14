@@ -70,6 +70,10 @@ bun run preview
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
 
+接口文档：[swagger](https://lgweb.oscua.com/doc.html#/home)
+UI:[ui](https://lanhuapp.com/link/#/invite?sid=lX6zT3Za
+)
+
 ## Nuxt Studio integration
 
 Add `@nuxthq/studio` dependency to your package.json:
@@ -105,3 +109,13 @@ Read more on [Nuxt Studio docs](https://nuxt.studio/docs/get-started/setup).
 ## Renovate integration
 
 Install [Renovate GitHub app](https://github.com/apps/renovate/installations/select_target) on your repository and you are good to go.
+
+## iconify integration
+```vue
+<Icon name="uil:github" style="color: black" />
+<!-- 自定义图标 -->
+<Icon name="i-simple-icons-youtubemusic" class="text-white text-[18px]" />
+<Icon name="my-icon:mdi-album" class="text-red-500 text-[18px]" />
+<Icon name="my-icon:spinners" class="text-red-500 text-[18px]" />
+<Icon name="my-icon:top" class="text-red-500 text-[18px]" />
+```
