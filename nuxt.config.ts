@@ -4,8 +4,8 @@ const isProdApi = process.env.NODE_API_ENV === 'production';
 console.log('env', process.env.NODE_ENV);
 console.log('NUXT_PUBLIC_API_BASE_URL=',process.env.NUXT_PUBLIC_API_BASE_URL)
 import { fileURLToPath } from 'url';
-// import { visualizer } from 'rollup-plugin-visualizer';
-// import viteCompression from 'vite-plugin-compression';
+import { visualizer } from 'rollup-plugin-visualizer';
+import viteCompression from 'vite-plugin-compression';
 export default defineNuxtConfig({
   // extends: ['@nuxt/ui-pro'],
 
@@ -147,60 +147,60 @@ export default defineNuxtConfig({
       minRatio: 0.8,
     },
   },
-  // vite: {
-  //   // ssr: {
-  //   //   noExternal: [
-  //   //     'dayjs',
-  //   //   ],
-  //   // },
-  //   define: {
-  //     // fixed apollo client err
-  //     __DEV__: isDev.toString(),
-  //   },
-  //   plugins: [
-  //     visualizer({
-  //       open: true,
-  //       gzipSize: true,
-  //     }),
-  //     viteCompression({
-  //       verbose: true, // 默认即可
-  //       disable: false, //开启压缩(不禁用)，默认即可
-  //       deleteOriginFile: false, //删除源文件
-  //       threshold: 10240, //压缩前最小文件大小
-  //       algorithm: 'gzip', //压缩算法
-  //       ext: '.gz', //文件类型
-  //     }),
-  //   ],
-  //   esbuild: isDev
-  //     ? {}
-  //     : {
-  //         pure: !isDev ? ['console.log', 'console.warn', 'debugger'] : [],
-  //         legalComments: 'none',
-  //       },
-  //   build: {
-  //     commonjsOptions: {
-  //       include: [/node_modules/],
-  //     },
-  //     optimization: {
-  //       splitChunks: {
-  //         cacheGroups: {
-  //           vendor: {
-  //             test: /[\\/]node_modules[\\/]/,
-  //             name: 'vendors',
-  //             chunks: 'all',
-  //           },
-  //         },
-  //       },
-  //     },
-  //   },
-  // },
-  // build: {
-  //   analyze: process.env.analyze ? true : false,
-  //   extend(config: { resolve: { alias: { [x: string]: string; }; }; optimization: { minimizer: { options: { terserOptions: { compress: { drop_console: boolean; }; }; }; }[]; }; }, { isClient }: any) {
-  //     config.resolve.alias['vue$'] = 'vue/dist/vue.esm.js';
-  //     if (isClient && isProdApi) {
-  //       config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true;
-  //     }
-  //   },
-  // },
+  vite: {
+    // ssr: {
+    //   noExternal: [
+    //     'dayjs',
+    //   ],
+    // },
+    define: {
+      // fixed apollo client err
+      __DEV__: isDev.toString(),
+    },
+    plugins: [
+      visualizer({
+        open: true,
+        gzipSize: true,
+      }),
+      viteCompression({
+        verbose: true, // 默认即可
+        disable: false, //开启压缩(不禁用)，默认即可
+        deleteOriginFile: false, //删除源文件
+        threshold: 10240, //压缩前最小文件大小
+        algorithm: 'gzip', //压缩算法
+        ext: '.gz', //文件类型
+      }),
+    ],
+    esbuild: isDev
+      ? {}
+      : {
+          pure: !isDev ? ['console.log', 'console.warn', 'debugger'] : [],
+          legalComments: 'none',
+        },
+    build: {
+      commonjsOptions: {
+        include: [/node_modules/],
+      },
+      optimization: {
+        splitChunks: {
+          cacheGroups: {
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name: 'vendors',
+              chunks: 'all',
+            },
+          },
+        },
+      },
+    },
+  },
+  build: {
+    analyze: process.env.analyze ? true : false,
+    extend(config: { resolve: { alias: { [x: string]: string; }; }; optimization: { minimizer: { options: { terserOptions: { compress: { drop_console: boolean; }; }; }; }[]; }; }, { isClient }: any) {
+      config.resolve.alias['vue$'] = 'vue/dist/vue.esm.js';
+      if (isClient && isProdApi) {
+        config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true;
+      }
+    },
+  },
 })
