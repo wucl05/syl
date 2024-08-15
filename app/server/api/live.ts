@@ -1,4 +1,4 @@
-import Http from 'server/http';
+import Http from '../http';
 interface LiveParams {
   page: number;
   pageSize: number;
@@ -7,7 +7,7 @@ interface LiveParams {
 }
 export default new (class live extends Http {
   /**
-   * @description: 登录
+   * @description: liveVideoList
    * @param {number} page	当前页	query	true
    * @param {number} pageSize	分页大小	query	true
    * @param {string} lang	站点语言标识(cn|en|jap|ger)\n (cn中文|en英文|jap日文|ger德文)
@@ -18,7 +18,7 @@ export default new (class live extends Http {
     return this.get('/api/open/liveVideo/list', params);
   }
   /**
-   * @description: 登录
+   * @description: liveVideoDetail
    * @param {number} page	当前页	query	true
    * @param {number} pageSize	分页大小	query	true
    * @param {string} lang	站点语言标识(cn|en|jap|ger)\n (cn中文|en英文|jap日文|ger德文)

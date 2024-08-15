@@ -89,13 +89,13 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-07-11',
   runtimeConfig: {
     public: {
-      apiBase: process.env.NUXT_PUBLIC_API_BASE_URL || 'http://127.0.0.1:7001',
+      apiBase: process.env.NUXT_PUBLIC_API_BASE_URL,
     },
   },
   // plugins: [{ src: '@/plugins/error.js', ssr: true }],
   proxy: {
     '/api': {
-      target: process.env.NUXT_PUBLIC_API_BASE_URL || 'http://127.0.0.1:7001',
+      target: process.env.NUXT_PUBLIC_API_BASE_URL,
       changeOrigin: true,
       ws: true,
       // pathRewrite: { '^/api/': '' },

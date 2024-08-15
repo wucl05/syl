@@ -30,7 +30,7 @@ export interface Daum {
 }
 
 // @/server/http.d.ts
-declare module '@/server/http' {
+declare module 'server/http' {
   export default class Http {
     // 假设这是一个简单的 HTTP 客户端类
     constructor(baseURL: string);
