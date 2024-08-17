@@ -6,9 +6,18 @@ console.log('NUXT_PUBLIC_API_BASE_URL=',process.env.NUXT_PUBLIC_API_BASE_URL)
 import { fileURLToPath } from 'url';
 import { visualizer } from 'rollup-plugin-visualizer';
 import viteCompression from 'vite-plugin-compression';
+import { setMeta } from './app/utils/setMeta';
 export default defineNuxtConfig({
   // extends: ['@nuxt/ui-pro'],
-
+  head: {
+    ...setMeta(),
+    htmlAttrs: {
+      lang: 'zh',
+    },
+    charset: 'utf-16',
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    // script:[]
+  },
   modules: [
     '@nuxt/content',
     '@nuxt/eslint',
@@ -103,11 +112,12 @@ export default defineNuxtConfig({
   },
 
   alias: {
-    // utils: fileURLToPath(new URL('./app/utils', import.meta.url)),
+    utils: fileURLToPath(new URL('./app/utils', import.meta.url)),
     types: fileURLToPath(new URL('./app/types', import.meta.url)),
     icons: fileURLToPath(new URL('./app/assets/icons', import.meta.url)),
-    cmps: fileURLToPath(new URL('./app/cpmponets', import.meta.url)),
     server: fileURLToPath(new URL('./app/server', import.meta.url)),
+    locales: fileURLToPath(new URL('./app/locales', import.meta.url)),
+    hooks: fileURLToPath(new URL('./app/composables', import.meta.url)),
     // '@': fileURLToPath(new URL('./app', import.meta.url)),
   },
   // 压缩

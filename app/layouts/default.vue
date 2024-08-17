@@ -13,11 +13,9 @@ const loadHandler = () => {
 </script>
 
 <template>
-  <div>
-    <PageLoading v-if="!loading" @success="loadHandler" />
-    <div v-if="loading">
-      <AppHeader />
+  <div class="app">
+    <AppHeader />
       <slot />
-    </div>
+    <PageLoading v-if="!loading" @success="loadHandler" />
   </div>
 </template>

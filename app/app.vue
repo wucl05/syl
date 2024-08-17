@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import lang from 'locales/second'
+const { locale } = useI18n()
 const colorMode = useColorMode()
 
 const color = computed(() => colorMode.value === 'dark' ? '#111827' : 'white')
@@ -18,7 +20,11 @@ useHead({
 })
 
 useSeoMeta({
-  titleTemplate: 'Loading...',
+  titleTemplate:  (productCategory) => {
+    return productCategory
+      ? `${productCategory} - ${lang[locale.value].title}`
+      : lang[locale.value].title
+  },
   ogImage: 'https://saas-template.nuxt.dev/social-card.png',
   twitterImage: 'https://saas-template.nuxt.dev/social-card.png',
   twitterCard: 'summary_large_image'

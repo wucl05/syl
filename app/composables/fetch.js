@@ -1,9 +1,9 @@
 /*
  * @Author: 聂芳 nie4161204@qq.com
- * @Date: 2023-03-03 11:37:52
- * @LastEditors: 聂芳 nie4161204@qq.com
- * @LastEditTime: 2023-03-03 14:08:42
- * @FilePath: /frog-nuxt-ssr/composables/fetch.js
+ * @Date: 2023-08-17 9:37:52
+ * @LastEditors: niefang2017 nie4161204@qq.com
+ * @LastEditTime: 2024-08-17 10:46:31
+ * @FilePath: /syl/app/composables/fetch.js
  * @Description:
  *
  */
@@ -14,4 +14,11 @@ export const fetchWithCookie = async (event, url) => {
     appendHeader(event, 'set-cookie', cookie);
   }
   return res._data;
+};
+export const fetchWithoutCookie = async (url,params) => {
+  const {
+    public: { apiBase },
+  } = useRuntimeConfig();
+  const res = await $fetch(apiBase+url,params);
+  return res;
 };

@@ -7,8 +7,12 @@ export default <Partial<Config>>{
       fontFamily: {
         sans: ['DM Sans', ...defaultTheme.fontFamily.sans]
       },
-      color:{
-        primary: '#1DA1F2'
+      colors:{
+        primary: '#1DA1F2',
+        'light-gray-1': '#f1f1f1'
+      },
+      maxWidth:{
+        'main':'1124px'
       }
     }
   }
