@@ -17,11 +17,11 @@
         :key="item"
        class="py-[0.31rem] px-[0.75rem] rounded-[1rem] whitespace-nowrap transition ease-in-out cursor-pointer hover:bg-light-gray-1 hover:font-bold"
        :class="{'bg-light-gray-1 font-bold':curYear===item}"
-       @click="handleClickYear(item)">
+       @click="handleClickTab(item)">
        {{item===999?lang[locale]['years']:item}}
       </span>
     </nav>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 py-10 md:mt-12">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 pb-10 md:mt-12">
       <LiveCard
         v-for="item in tableData.list"
         :item="item"
@@ -41,16 +41,16 @@ import type { LiveItem,LiveResponseData } from '~/types/live'
 import banner from '~/assets/images/banner_4.jpg'
 import lang from 'locales/live'
 import { fetchWithoutCookie } from 'hooks/fetch'
+import { useYears } from 'hooks/ui/useYears'
 const { locale } = useI18n()
 const { liveApi } = useApi();
-const router = useRouter()
-const curYear = ref(999);
+const {curYear,years,handleClickYear} = useYears()
 const loading = ref(true)
 const pageParams=ref({
   page:1,
   pageSize:9,
   lang:locale.value,
-  year:curYear.value === 999 ? new Date().getFullYear():curYear.value
+  year:curYear.value === 999 ? '':curYear.value
 })
 const tableData = ref({
   list:[],
@@ -121,19 +121,10 @@ const links = [{
   label: lang[locale.value]['links:live'],
   labelClass:'text-black sm:text-white opacity-70'
 },]
-const getYears = () => {
-  const years = [999]
-  for (let i = new Date().getFullYear(); i >= 2018; i--) {
-    years.push(i)
-  }
-  return years
-}
-console.log('getYears()',getYears())
-const years = getYears()
 
-const handleClickYear = useDebounceFn((year:number)=>{
-  curYear.value = year
-  pageParams.value.year = year
+const handleClickTab = useDebounceFn(async(year:number)=>{
+  await handleClickYear(year)
+  pageParams.value.year = year === 999 ? '':year
   pageParams.value.page = 1
   init()
 },300)
