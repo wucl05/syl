@@ -1,14 +1,17 @@
 import type { ParsedContent } from '@nuxt/content'
-
-export interface LiveItem extends ParsedContent {
+type BaseLiveItem = ParsedContent & {
   title: string
-  publishDate: string
-  author: string
-  coverImg?: string
-  id?: string
-  viewCount?:number
+  id: string
 }
-
+export type LiveItem = BaseLiveItem & {
+  viewCount?:number
+  publishDate?: string
+  coverImg?: string
+  author?: string
+}
+export type LiveDetail = LiveItem & {
+  videoUrl?:string
+}
 export interface LiveResponseData extends ParsedContent {
   code: number,
   data:LiveItem[],
@@ -16,3 +19,11 @@ export interface LiveResponseData extends ParsedContent {
   pages:number,
   total:number
 }
+export type LiveDetailResponseData = {
+  code: number,
+  data:LiveDetail,
+  msg?:string
+  pages?:number,
+  total?:number
+}
+

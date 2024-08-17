@@ -25,13 +25,11 @@ onMounted(async () => {
 })
 </script>
 <template>
-    <div class="row fc flex w-screen h-screen">
-        <div class="col fc">
-            <UIcon name="svg-spinners:8-dots-rotate" class="w-5 h-5" />
-            <div class="text-sm p-2">
-                Loading...
-            </div>
-        </div>
+    <div class="flex flex-col justify-center items-center  w-screen h-screen fixed top-0 left-0 z-[1000] bg-black bg-opacity-60 text-white">
+      <UIcon name="svg-spinners:pulse-3" class="w-10 h-10" />
+      <div class="text-sm p-2">
+          Loading...
+      </div>
     </div>
 </template>
 <style scoped></style>

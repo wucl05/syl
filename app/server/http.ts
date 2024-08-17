@@ -2,7 +2,7 @@ import { useFetch, useRuntimeConfig } from "nuxt/app";
 import type { UseFetchOptions } from 'nuxt/app';
 import { hash } from 'ohash';
 
-const fetch = (url: string, options:UseFetchOptions<T>, headers: Record<string, string> = {}, handleError: any) => {
+const fetch = (url: string, options:UseFetchOptions<T>={}, headers: Record<string, string> = {}, handleError: any) => {
   const {
     public: { apiBase },
   } = useRuntimeConfig(); // 3.0正式版环境变量要从useRuntimeConfig里的public拿
@@ -21,7 +21,8 @@ const fetch = (url: string, options:UseFetchOptions<T>, headers: Record<string, 
     useFetch(reqUrl, { ...options, key, headers: customHeaders })
         .then(({ data, error }) => {
           if (error.value) {
-            const { code, msg = '' } = error.value.data;
+            console.log('error.value',error.value)
+            const { code=null, msg = '' } = error.value?.data ?? {};
             if (!handleError && code !== 0 && process.client) {
               console.log(msg || '服务异常')
             }

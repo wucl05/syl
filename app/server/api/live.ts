@@ -26,6 +26,6 @@ export default new (class live extends Http {
    * @return {*}
    */
   liveVideoDetail(id: string): any {
-    return this.get(`/api/open/liveVideo/detail/${id}`);
+    return this.get(`/api/open/liveVideo/detail/${id}`,);
   }
 })();

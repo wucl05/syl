@@ -65,7 +65,7 @@ const tableData = ref({
   total:0
 })
 
-const title = lang[locale.value]['links:live'];
+const title = lang[locale.value]['links:news'];
 try {
   loading.value = true
   const {total=0,data:list=[]} = await liveApi.liveVideoList(pageParams.value);
@@ -130,11 +130,6 @@ const links = [
   {
     label: lang[locale.value]['links:news'],
     labelClass:'text-black dark:text-white sm:text-white',
-    to: '/news'
-  },
-  {
-    label: lang[locale.value]['links:live'],
-    labelClass:'text-black dark:text-white sm:text-white opacity-70'
   }
 ]
 
@@ -146,7 +141,7 @@ const handleClickTab = useDebounceFn(async(year:number)=>{
 },300)
 const handleClickItem = (item:LiveItem) => {
   navigateTo({
-    path: `/live/${item.id}`,
+    path: `./live/${item.id}`,
   });
 }
 </script>
