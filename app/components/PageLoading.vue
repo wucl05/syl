@@ -25,7 +25,7 @@ onMounted(async () => {
 })
 </script>
 <template>
-    <div class="flex flex-col justify-center items-center  w-screen h-screen fixed top-0 left-0 z-[1000] bg-black bg-opacity-60 text-white">
+    <div class="flex flex-col justify-center items-center w-screen h-screen fixed top-0 left-0 z-[10000] bg-black bg-opacity-100 text-white">
       <UIcon name="svg-spinners:pulse-3" class="w-10 h-10" />
       <div class="text-sm p-2">
           Loading...
