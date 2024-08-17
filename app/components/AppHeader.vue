@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { RouteLocationNormalizedLoaded,RouteRecordNameGeneric } from 'vue-router';
 import langue from '@/locales/header.js'
 const { locale, setLocale } = useI18n()
 const items = [[
@@ -13,11 +14,21 @@ const items = [[
     click: () => setLocale("en")
   }
 ]]
+const blackMenuNames = [
+  'live-id',
+]
+const route = useRoute() as RouteLocationNormalizedLoaded;
+const isBlackMenu = computed(()=>{
+  return typeof route.name === 'string' ? blackMenuNames.includes(route.name) : false
+})
 </script>
 <template>
-  <div class="row fixed w-full z-50 text-white px-5 lg:px-12 py-3.5 fac text-sm	">
+  <div class="row fixed w-full z-50 px-5 lg:px-12 py-3.5 fac text-sm	" :class="{
+    'bg-white text-black': isBlackMenu
+    ,'text-white': !isBlackMenu
+  }">
     <div class="row fac">
-      <svg width="71.888" height="28" viewBox="0 0 71.888 28" style="fill: white;">
+      <svg width="71.888" height="28" viewBox="0 0 71.888 28" :style="{fill: isBlackMenu?'#003F97':'white'}">
         <defs></defs>
         <g transform="translate(-43.623 -130.839)">
           <path class="a"
@@ -110,5 +121,9 @@ const items = [[
       </UDropdown>
     </div>
 
+  </div>
+  <!-- placeholder -->
+  <div v-if='isBlackMenu' class="py-3.5" >
+  <div style="height:28px"></div>
   </div>
 </template>
