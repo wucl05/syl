@@ -32,11 +32,19 @@
         >
       </LiveCard>
     </div>
+    <div v-if="tableData.total>pageParams.pageSize" class="flex justify-center mb-10">
+      <UPagination
+        v-model="pageParams.page"
+        :page-count="pageParams.pageSize"
+        :active-button="{ color: 'black' }"
+        :total="tableData.total"
+      />
+    </div>
   </div>
 
 </template>
 <script setup lang="ts">
-import { useDebounceFn } from '@vueuse/core';
+import { useDebounceFn,watchDebounced } from '@vueuse/core';
 import type { LiveItem,LiveResponseData } from '~/types/live'
 import banner from '~/assets/images/banner_4.jpg'
 import lang from 'locales/live'
