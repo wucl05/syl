@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ParsedContent } from '@nuxt/content'
-
+const route = useRoute()
 const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation(), { default: () => [] })
 const { data: files } = useLazyFetch<ParsedContent[]>('/api/search.json', { default: () => [], server: false })
 
@@ -16,6 +16,6 @@ const loadHandler = () => {
   <div class="app">
     <AppHeader />
       <slot />
-    <PageLoading v-if="!loading" @success="loadHandler" />
+    <PageLoading v-if="!loading && route.name === 'index'" @success="loadHandler" />
   </div>
 </template>
