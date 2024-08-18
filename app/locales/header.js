@@ -16,7 +16,7 @@ export default {
         },
         {
             label: 'NewsEvents',
-            value: '/sourceEnergyStorage'
+            value: '/news'
         },
         {
             label: 'ContactUs',
@@ -31,7 +31,7 @@ export default {
             },
             {
                 label: "OnLineGarrely/live",
-                value: "live",
+                value: "/live",
                 icon: "heroicons-solid:eye"
             }
         ]
@@ -57,7 +57,7 @@ export default {
         },
         {
             label: '新闻与活动',
-            value: '/sourceEnergyStorage',
+            value: '/news',
             icon: "heroicons-solid:document-text"
         },
         {
@@ -74,7 +74,7 @@ export default {
             },
             {
                 label: "线上展厅/直播",
-                value: "live",
+                value: "/live",
                 icon: "heroicons-solid:eye"
             }
         ]
