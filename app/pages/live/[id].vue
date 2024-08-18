@@ -21,7 +21,7 @@
     <div class="video-container flex items-center justify-space-between gap-10">
       <nuxt-link :to="info.prev.id?`/live/${info.prev.id}`:''" :class="['prev sm:flex hidden flex-shrink-0 items-center justify-start 2xl:w-96 xl:w-80 lg:w-60 md:w-40 sm:w-10 md:pl-10 md:pr-5 md:py-4 pl-12 pr-7 py-6 ease-in-out duration-300',info?.prev?.id?'xl:hover:bg-primary-blue cursor-pointer opacity-100':'cursor-not-allowed opacity-50']">
         <div class="md:w-10 md:h-10 2xl:w-16 2xl:h-16 bg-primary-yelleow shrink-0 md:mr-5 2x:mr-7 flex flex-col items-center justify-center">
-          <UIcon name="humbleicons:chevron-left" class="w-6 h-6"></UIcon>
+          <UIcon name="humbleicons:chevron-left" class="w-6 h-6 text-black"></UIcon>
         </div>
         <div class="sm:hidden xl:block child line-clamp-2 break-words text-white">{{info.prev.title}}</div>
       </nuxt-link>
@@ -43,7 +43,7 @@
       </div>
       <nuxt-link :to="info.next.id?`/live/${info.next.id}`:''" :class="['next sm:flex hidden flex-shrink-0 items-center justify-end 2xl:w-96 xl:w-80 lg:w-60 md:w-40 sm:w-10 pr-12 pl-7 md:pr-10 md:pl-5 md:py-4 py-6  ease-in-out duration-300',info?.next?.id?'xl:hover:bg-primary-blue cursor-pointer opacity-100':'cursor-not-allowed opacity-50']">
         <div class="order-2 md:w-10 md:h-10 2xl:w-16 2xl:h-16 bg-primary-yelleow shrink-0 md:ml-5 2x:ml-7 flex flex-col items-center justify-center">
-          <UIcon name="humbleicons:chevron-right" class="w-6 h-6"></UIcon>
+          <UIcon name="humbleicons:chevron-right" class="w-6 h-6 text-black"></UIcon>
         </div>
         <div class="sm:hidden xl:block child line-clamp-2 break-words text-white order-1">{{info.next.title}}</div>
       </nuxt-link>

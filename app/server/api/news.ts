@@ -21,6 +21,6 @@ export default new (class news extends Http {
    * @return {*}
    */
   newsDetail(id: string): any {
-    return this.get(`/api/open/news/detail/${id}`,);
+    return this.get(`/api/open/news/detail/${id}`);
   }
 })();

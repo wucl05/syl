@@ -21,16 +21,28 @@
        {{item===999?lang[locale]['years']:item}}
       </span>
     </nav>
-    <div class="grid grid-cols-1 gap-10 pb-10 md:mt-12">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 pb-10 md:mt-12">
       <LiveCard
         v-for="item in tableData.list"
         :item="item"
         :key="item.id"
-        :isFlex="true"
-        class="border-gray-200 dark:border-gray-700 border-dashed border-t pt-8"
-        @clickItem="handleClickItem(item)"
-        @play="handleClickItem(item)"
+        :showInfo="false"
+        disabled
         >
+        <div class="border-gray-200 dark:border-gray-700 border-solid border-t mt-3 pt-3">
+          <div class="flex gap-1 items-center">
+            <UIcon name="heroicons:calendar-days" class="w-4 h-4" />
+            <div class="line-clamp-1 text-sm">{{lang[locale]['links:events:date']}}:&nbsp;&nbsp;{{locale === 'cn' ? item.startDate : item.startDateEn}}-{{ locale === 'cn' ? item.endDate : item.endDateEn}}</div>
+          </div>
+          <div class="flex gap-1 items-center">
+            <UIcon name="heroicons:map-pin" class="w-4 h-4" />
+            <div class="line-clamp-1 text-sm">{{lang[locale]['links:events:localtion']}}:&nbsp;&nbsp;{{ item?.address ?? '' }}</div>
+          </div>
+          <div class="flex gap-1 items-center">
+            <UIcon name="heroicons:square-3-stack-3d" class="w-4 h-4" />
+            <div class="line-clamp-1 text-sm">{{lang[locale]['links:events:no']}}:&nbsp;&nbsp;{{item?.venue ?? ''}}</div>
+          </div>
+        </div>
       </LiveCard>
     </div>
     <div v-if="tableData.total>pageParams.pageSize" class="flex justify-center mb-10">
@@ -46,13 +58,13 @@
 </template>
 <script setup lang="ts">
 import { useDebounceFn } from '@vueuse/core';
-import type { NewsItem,NewsResponseData } from '~/types/news'
+import type { EventsItem,EventsResponseData } from '~/types/events'
 import banner from '~/assets/images/banner_7.jpg'
 import lang from 'locales/live'
 import { fetchWithoutCookie } from 'hooks/fetch'
 import { useYears } from 'hooks/ui/useYears'
 const { locale } = useI18n()
-const { newsApi } = useApi();
+const { eventsApi } = useApi();
 const {curYear,years,handleClickYear} = useYears()
 const loading = ref(true)
 const pageParams=ref({
@@ -66,13 +78,13 @@ const tableData = ref({
   total:0
 })
 
-const title = lang[locale.value]['links:news'];
+const title = lang[locale.value]['links:events'];
 try {
   loading.value = true
-  const {total=0,data:list=[]} = await newsApi.newsList(pageParams.value);
+  const {total=0,data:list=[]} = await eventsApi.eventsList(pageParams.value);
   loading.value = false
-  const keywords = list?.map((item:NewsItem)=>item.title).join(',')??'';
-  const description = list?.map((item:NewsItem)=>item.summary).join(',')??'';
+  const keywords = list?.map((item:EventsItem)=>item.title).join(',')??'';
+  const description = list?.map((item:EventsItem)=>item.venue).join(',')??'';
     useSeoMeta({
     title: title,
     keywords:keywords,
@@ -84,7 +96,7 @@ try {
     twitterCard: 'summary_large_image',
   })
   defineOgImage({
-    component: 'news',
+    component: 'events',
     title: title,
     description: description,
     keywords:keywords
@@ -103,7 +115,7 @@ try {
 }
 const init = async () => {
   try {
-    const res:NewsResponseData = await fetchWithoutCookie('/api/open/news/list',{
+    const res:EventsResponseData = await fetchWithoutCookie('/api/open/activity/list',{
       params:pageParams.value,
       method: 'GET',
     });
@@ -129,7 +141,7 @@ const links = [
     to: '/'
   },
   {
-    label: lang[locale.value]['links:news'],
+    label: lang[locale.value]['links:events'],
     labelClass:'text-black dark:text-white sm:text-white opacity-70',
   }
 ]
@@ -140,11 +152,6 @@ const handleClickTab = useDebounceFn(async(year:number)=>{
   pageParams.value.page = 1
   init()
 },300)
-const handleClickItem = (item:NewsItem) => {
-  navigateTo({
-    path: `./news/${item.id}`,
-  });
-}
 </script>
 <style scoped>
 .hide-scrollbar::-webkit-scrollbar {
