@@ -13,8 +13,8 @@ const loadHandler = () => {
 </script>
 
 <template>
-  <div class="app">
-    <AppHeader />
+  <div ref="el" class="app">
+    <AppHeader/>
       <slot />
     <PageLoading v-if="!loading && route.name === 'index'" @success="loadHandler" />
   </div>

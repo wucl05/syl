@@ -1,7 +1,7 @@
 <template>
   <section class="banner flex flex-col bg-no-repeat bg-cover bg-center w-full md:min-h-[400px] min-h-60 m-auto" :style="{'background-image': `url(${banner})`}">
     <div class="p-4 max-w-main m-auto w-full text-white text-left">
-      <h1 class="sm:text-3xl md:text-4xl xl:text-5xl">{{ title }}</h1>
+      <h1 class="text-2xl sm:text-3xl md:text-4xl xl:text-5xl">{{ title }}</h1>
     </div>
   </section>
   <div class="pl-4 pr-4 max-w-main m-auto box-border">

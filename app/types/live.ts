@@ -1,4 +1,10 @@
 import type { ParsedContent } from '@nuxt/content'
+export type LivePagesParams = {
+  page: number;
+  pageSize: number;
+  lang: string;
+  year: string;
+}
 type BaseLiveItem = ParsedContent & {
   title: string
   id: string

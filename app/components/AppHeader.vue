@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type { RouteLocationNormalizedLoaded,RouteRecordNameGeneric } from 'vue-router';
+import { useElementVisibility } from '@vueuse/core'
+import type { RouteLocationNormalizedLoaded } from 'vue-router';
 import langue from '@/locales/header.js'
 const { locale, setLocale } = useI18n()
 const items = [[
@@ -16,21 +17,29 @@ const items = [[
 ]]
 const blackMenuNames = [
   'live-id',
+  'news-id'
 ]
 const route = useRoute() as RouteLocationNormalizedLoaded;
 const isBlackMenu = computed(()=>{
   return typeof route.name === 'string' ? blackMenuNames.includes(route.name) : false
 })
+
+const target = ref(null)
+const targetIsVisible = useElementVisibility(target)
+const autoClass = computed(()=>{
+  const base = isBlackMenu.value ? 'bg-white dark:bg-black text-black dark:text-white' : 'text-white'
+  const baseText = isBlackMenu.value ? 'text-[#003F97] dark:text-white' : 'text-white'
+  const visibleBg = !targetIsVisible.value ? isBlackMenu.value ? 'bg-white dark:bg-black' : 'bg-white' : base
+  const visibleText = !targetIsVisible.value ? isBlackMenu.value ? 'text-[#003F97] dark:text-white' : 'text-[#003F97] dark:text-white' : baseText
+  return {
+    bg:visibleBg,
+    text:visibleText
+  }
+})
 </script>
 <template>
-  <div class="row fixed w-full z-50 px-5 lg:px-12 py-3.5 fac text-sm	" :class="{
-    'bg-white text-black dark:bg-black dark:text-white': isBlackMenu
-    ,'text-white': !isBlackMenu
-  }">
-    <div class="row fac" :class="{
-    'bg-white text-[#003F97] dark:bg-black dark:text-white': isBlackMenu
-    ,'text-white': !isBlackMenu
-  }">
+  <div ref="el" :class="['row fixed w-full z-50 px-5 lg:px-12 py-3.5 fac text-sm',autoClass.bg]">
+    <div :class="['row fac',autoClass.text]">
       <svg width="71.888" height="28" viewBox="0 0 71.888 28" fill="currentColor">
         <defs></defs>
         <g transform="translate(-43.623 -130.839)">
@@ -127,6 +136,8 @@ const isBlackMenu = computed(()=>{
   </div>
   <!-- placeholder -->
   <div v-if='isBlackMenu' class="py-3.5" >
-  <div style="height:28px"></div>
+    <div style="height:28px"></div>
   </div>
+  <div ref="target"></div>
+
 </template>

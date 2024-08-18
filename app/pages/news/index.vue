@@ -1,7 +1,7 @@
 <template>
   <section class="banner flex flex-col bg-no-repeat bg-cover bg-center w-full md:min-h-[400px] min-h-60 m-auto" :style="{'background-image': `url(${banner})`}">
     <div class="p-4 max-w-main m-auto w-full text-white text-left">
-      <h1 class="sm:text-3xl md:text-4xl xl:text-5xl">{{ title }}</h1>
+      <h1 class="text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-bold">{{ title }}</h1>
     </div>
   </section>
   <div class="pl-4 pr-4 max-w-main m-auto box-border">
@@ -21,12 +21,13 @@
        {{item===999?lang[locale]['years']:item}}
       </span>
     </nav>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 pb-10 md:mt-12">
+    <div class="grid grid-cols-1 gap-10 pb-10 md:mt-12">
       <LiveCard
         v-for="item in tableData.list"
         :item="item"
         :key="item.id"
-        :isVideo="true"
+        :isFlex="true"
+        class="border-gray-200 dark:border-gray-700 border-dashed border-t pt-8"
         @clickItem="handleClickItem(item)"
         @play="handleClickItem(item)"
         >
@@ -45,13 +46,13 @@
 </template>
 <script setup lang="ts">
 import { useDebounceFn } from '@vueuse/core';
-import type { LiveItem,LiveResponseData } from '~/types/live'
-import banner from '~/assets/images/banner_4.jpg'
+import type { NewsItem,NewsResponseData } from '~/types/news'
+import banner from '~/assets/images/banner_7.jpg'
 import lang from 'locales/live'
 import { fetchWithoutCookie } from 'hooks/fetch'
 import { useYears } from 'hooks/ui/useYears'
 const { locale } = useI18n()
-const { liveApi } = useApi();
+const { newsApi } = useApi();
 const {curYear,years,handleClickYear} = useYears()
 const loading = ref(true)
 const pageParams=ref({
@@ -68,10 +69,10 @@ const tableData = ref({
 const title = lang[locale.value]['links:news'];
 try {
   loading.value = true
-  const {total=0,data:list=[]} = await liveApi.liveVideoList(pageParams.value);
+  const {total=0,data:list=[]} = await newsApi.newsList(pageParams.value);
   loading.value = false
-  const keywords = list?.map((item:LiveItem)=>item.title).join(',')??'';
-  const description = `${title},${keywords}`
+  const keywords = list?.map((item:NewsItem)=>item.title).join(',')??'';
+  const description = list?.map((item:NewsItem)=>item.summary).join(',')??'';
     useSeoMeta({
     title: title,
     keywords:keywords,
@@ -83,7 +84,7 @@ try {
     twitterCard: 'summary_large_image',
   })
   defineOgImage({
-    component: 'live',
+    component: 'news',
     title: title,
     description: description,
     keywords:keywords
@@ -94,7 +95,7 @@ try {
     list
   }
 } catch (error) {
-  console.log('直播服务异常',error)
+  console.log('新闻服务异常',error)
   tableData.value = {
     total:0,
     list:[]
@@ -102,7 +103,7 @@ try {
 }
 const init = async () => {
   try {
-    const res:LiveResponseData = await fetchWithoutCookie('/api/open/liveVideo/list',{
+    const res:NewsResponseData = await fetchWithoutCookie('/api/open/news/list',{
       params:pageParams.value,
       method: 'GET',
     });
@@ -139,9 +140,9 @@ const handleClickTab = useDebounceFn(async(year:number)=>{
   pageParams.value.page = 1
   init()
 },300)
-const handleClickItem = (item:LiveItem) => {
+const handleClickItem = (item:NewsItem) => {
   navigateTo({
-    path: `./live/${item.id}`,
+    path: `./news/${item.id}`,
   });
 }
 </script>
