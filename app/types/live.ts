@@ -11,6 +11,8 @@ export type LiveItem = BaseLiveItem & {
 }
 export type LiveDetail = LiveItem & {
   videoUrl?:string
+  prev?: LiveItem
+  next?: LiveItem
 }
 export interface LiveResponseData extends ParsedContent {
   code: number,

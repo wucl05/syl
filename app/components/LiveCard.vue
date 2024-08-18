@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="mt-4">
-      <h3 class="text-lg text-black dark:text-white line-clamp-2">{{ item.title }}</h3>
+      <h3 class="text-lg text-black dark:text-white line-clamp-2 break-words">{{ item.title }}</h3>
       <div class="text-sm text-[#6e6e6e] mt-1">{{ item.publishDate }}</div>
     </div>
   </div>
