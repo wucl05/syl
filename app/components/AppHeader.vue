@@ -36,6 +36,9 @@ const autoClass = computed(()=>{
     text:visibleText
   }
 })
+const handleSelect= ()=>{
+  console.log('click')
+}
 </script>
 <template>
   <div ref="el" :class="['row fixed w-full z-50 px-5 lg:px-12 py-3.5 fac text-sm',autoClass.bg]">

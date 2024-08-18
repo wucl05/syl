@@ -1,0 +1,97 @@
+<template>
+  <section class="banner flex flex-col bg-no-repeat bg-cover bg-center w-full md:min-h-[400px] min-h-60 m-auto" :style="{'background-image': `url(${banner})`}">
+    <div class="p-4 max-w-main m-auto w-full text-white text-left">
+      <h1 class="text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-bold">{{ title }}</h1>
+    </div>
+  </section>
+  <div class="pl-4 pr-4 max-w-main m-auto box-border">
+    <UBreadcrumb :links="links" class="sm:-mt-[1.8rem] mt-[1rem]" :ui="{
+      divider: {
+        base: 'flex-shrink-0 w-5 h-5 rtl:rotate-180 sm:text-white text-black dark:text-white sm:opacity-70',
+      },
+    }" >
+    </UBreadcrumb>
+  </div>
+  <section class="px-4 2xl:px-0 my-8 sm:my-12 md:my-16 xl:my-20">
+    <div class="max-w-main m-auto ">
+      <div class="flex flex-col-reverse sm:flex-row justify-center items-center gap-10">
+        <div class="w-full sm:w-1/2">
+          <h2 class="font-bold text-4xl">{{ JobsLang[locale]['jobs']['section1']['title'] }}</h2>
+          <div>
+            <div class="li-square square-blue flex mt-4 " v-for="(item, index) in JobsLang[locale]['jobs']['section1']['list']" :key="index">
+              {{ item }}
+            </div>
+          </div>
+        </div>
+        <div class="w-full sm:w-1/2">
+          <img :src="imgCard0" :alt="JobsLang[locale]['jobs']['section1']['title']" class="w-full object-cover block m-auto" />
+        </div>
+      </div>
+      <NuxtLink to="/live" class="w-40 h-10 text-sm leading-10 border border-solid text-center font-bold inline-block box-border mt-9 hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black transition delay-150 duration-300 ease-in-out">{{ title }}</NuxtLink>
+    </div>
+  </section>
+
+</template>
+<script setup lang="ts">
+import { useDebounceFn } from '@vueuse/core';
+import banner from '~/assets/images/banner_6.jpg'
+import imgCard0 from '~/assets/images/jobs_card_0.jpg'
+import imgCard1 from '~/assets/images/jobs_card_1.jpg'
+import imgCard2 from '~/assets/images/jobs_card_2.jpg'
+import imgCard3 from '~/assets/images/jobs_card_3.jpg'
+import lang from 'locales/live'
+import JobsLang from 'locales/jobs'
+const { locale } = useI18n()
+
+const title = lang[locale.value]['links:jobs'];
+const loading = ref(true)
+setTimeout(() => {
+  loading.value = false
+}, 1000)
+
+// useSeoMeta({
+//     title: title,
+//     keywords:keywords,
+//     ogTitle: title,
+//     description: description,
+//     ogDescription: description,
+//     ogImage: list?.[0]?.coverImg??banner,
+//     twitterImage: list?.[0]?.coverImg??banner,
+//     twitterCard: 'summary_large_image',
+//   })
+//   defineOgImage({
+//     component: 'events',
+//     title: title,
+//     description: description,
+//     keywords:keywords
+//   })
+// 链接
+const links = [
+  {
+    label: lang[locale.value]['links:home'],
+    labelClass:'text-black dark:text-white sm:text-white',
+    to: '/'
+  },
+  {
+    label: lang[locale.value]['links:jobs'],
+    labelClass:'text-black dark:text-white sm:text-white opacity-70',
+  }
+]
+</script>
+<style scoped>
+.li-square{
+  position: relative;
+}
+.li-square::before{
+  content: '';
+  width: 0.38rem;
+  height: 0.38rem;
+  flex-shrink: 0;
+  margin-right: 0.5rem;
+  display: block;
+  margin-top: 0.5rem;
+}
+.square-blue::before{
+  background-color: #003F97;
+}
+</style>
