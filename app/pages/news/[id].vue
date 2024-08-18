@@ -53,9 +53,8 @@ const links = [
     to: '/news'
   },
   {
-    label: lang[locale.value]['links:live'],
+    label: lang[locale.value]['links:newsDetail'],
     labelClass:'text-black dark:text-white opacity-70',
-    to: '/live'
   }
 ]
 const title =ref('');
