@@ -29,7 +29,7 @@ const targetIsVisible = useElementVisibility(target)
 const autoClass = computed(()=>{
   const base = isBlackMenu.value ? 'bg-white dark:bg-black text-black dark:text-white' : 'text-white'
   const baseText = isBlackMenu.value ? 'text-[#003F97] dark:text-white' : 'text-white'
-  const visibleBg = !targetIsVisible.value ? isBlackMenu.value ? 'bg-white dark:bg-black' : 'bg-white' : base
+  const visibleBg = !targetIsVisible.value ? 'bg-white dark:bg-black' : base
   const visibleText = !targetIsVisible.value ? isBlackMenu.value ? 'text-[#003F97] dark:text-white' : 'text-[#003F97] dark:text-white' : baseText
   return {
     bg:visibleBg,
