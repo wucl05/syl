@@ -73,21 +73,21 @@ try {
   const keywords = list?.map((item:LiveItem)=>item.title).join(',')??'';
   const description = `${title},${keywords}`
     useSeoMeta({
-    title: title,
-    keywords:keywords,
-    ogTitle: title,
-    description: description,
-    ogDescription: description,
-    ogImage: list?.[0]?.coverImg??banner,
-    twitterImage: list?.[0]?.coverImg??banner,
-    twitterCard: 'summary_large_image',
-  })
-  defineOgImage({
-    component: 'live',
-    title: title,
-    description: description,
-    keywords:keywords
-  })
+      title: title,
+      keywords:keywords,
+      ogTitle: title,
+      description: description,
+      ogDescription: description,
+      ogImage: list?.[0]?.coverImg??banner,
+      twitterImage: list?.[0]?.coverImg??banner,
+      twitterCard: 'summary_large_image',
+    })
+    defineOgImage({
+      component: 'live',
+      title: title,
+      description: description,
+      keywords:keywords
+    })
   console.log('list',list)
   tableData.value = {
     total,

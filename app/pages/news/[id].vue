@@ -12,23 +12,22 @@
       <h1 class="text-4xl font-bold text-[#222] dark:text-white">{{ info.title }}</h1>
       <h4 class="time mt-[.56rem] text-[#666]">{{ locale !== 'cn' ? info.publishDateEn : info.publishDate }}</h4>
     </div>
-    <div class="video-container flex items-center justify-space-between gap-10">
-      <nuxt-link :to="info.prev.id?`/live/${info.prev.id}`:''" :class="['prev sm:flex hidden flex-shrink-0 items-center justify-start 2xl:w-96 xl:w-80 lg:w-60 md:w-40 sm:w-10 md:pl-10 md:pr-5 md:py-4 pl-12 pr-7 py-6 ease-in-out duration-300',info?.prev?.id?'xl:hover:bg-primary-blue cursor-pointer opacity-100':'cursor-not-allowed opacity-50']">
+    <div class="video-container flex flex-col lg:flex-row items-center justify-space-between lg:gap-10 gap-5">
+      <nuxt-link :to="info.prev.id?`/news/${info.prev.id}`:''" :class="['order-3 lg:order-1 prev sm:flex  flex-shrink-0 items-center justify-start 2xl:w-96 xl:w-80 lg:w-60 w-full md:pl-10 md:pr-5 md:py-4 pl-12 pr-7 py-6 ease-in-out duration-300',info?.prev?.id? 'xl:hover:bg-primary-blue bg-primary-blue lg:bg-transparent cursor-pointer opacity-100' :'h-0 opacity-0']">
         <div class="md:w-10 md:h-10 2xl:w-16 2xl:h-16 bg-primary-yelleow shrink-0 md:mr-5 2x:mr-7 flex flex-col items-center justify-center">
           <UIcon name="humbleicons:chevron-left" class="w-6 h-6 text-black"></UIcon>
         </div>
-        <div class="sm:hidden xl:block child line-clamp-2 break-words text-white">{{info.prev.title}}</div>
+        <div class="child line-clamp-2 break-words text-white">{{info.prev.title}}</div>
       </nuxt-link>
-      <div class="max-w-[55.75rem] m-auto flex-1 px-4 sm:px-0">
-        <article v-html="info.content">
+      <div class="max-w-[55.75rem] m-auto flex-1 px-4 lg:px-0 content order-2 lg:order-2">
+        <article v-html="info?.content ?? ''">
         </article>
-        <content></content>
       </div>
-      <nuxt-link :to="info.next.id?`/live/${info.next.id}`:''" :class="['next sm:flex hidden flex-shrink-0 items-center justify-end 2xl:w-96 xl:w-80 lg:w-60 md:w-40 sm:w-10 pr-12 pl-7 md:pr-10 md:pl-5 md:py-4 py-6  ease-in-out duration-300',info?.next?.id?'xl:hover:bg-primary-blue cursor-pointer opacity-100':'cursor-not-allowed opacity-50']">
-        <div class="order-2 md:w-10 md:h-10 2xl:w-16 2xl:h-16 bg-primary-yelleow shrink-0 md:ml-5 2x:ml-7 flex flex-col items-center justify-center">
+      <nuxt-link :to="info.next.id?`/news/${info.next.id}`:''" :class="['order-3 lg:order-3 next sm:flex flex-shrink-0 items-center justify-end 2xl:w-96 xl:w-80 lg:w-60 w-full pr-12 pl-7 md:pr-10 md:pl-5 md:py-4 py-6  ease-in-out duration-300',info?.next?.id?'xl:hover:bg-primary-blue bg-primary-blue lg:bg-transparent cursor-pointer opacity-100':'h-0 opacity-0']">
+        <div class="md:w-10 md:h-10 2xl:w-16 2xl:h-16 bg-primary-yelleow shrink-0 md:ml-5 2x:ml-7 flex flex-col items-center justify-center order-2">
           <UIcon name="humbleicons:chevron-right" class="w-6 h-6 text-black"></UIcon>
         </div>
-        <div class="sm:hidden xl:block child line-clamp-2 break-words text-white order-1">{{info.next.title}}</div>
+        <div class="child line-clamp-2 break-words text-white order-1">{{info.next.title}}</div>
       </nuxt-link>
     </div>
   </div>
@@ -60,33 +59,53 @@ const links = [
 const title =ref('');
 const loading = ref(false)
 const info:NewsDetail = ref({})
-loading.value = true
-const res:NewsDetailResponseData<NewsDetail>  = await newsApi.newsDetail(id);
-console.log('res===',res)
-const {data} = res
-data.prev = data?.prev ?? {}
-data.next = data?.next ?? {}
-info.value = data ?? {}
-loading.value = false
-title.value = data?.title??''
+try {
+  loading.value = true
+  const res:NewsDetailResponseData<NewsDetail>  = await newsApi.newsDetail(id);
+  console.log('res===',res)
+  const {data} = res
+  data.prev = data?.prev ?? {}
+  data.next = data?.next ?? {}
+  info.value = data ?? {}
+  loading.value = false
+  title.value = data?.title??''
+  const description = data?.summary ?? ''
+  useSeoMeta({
+    title: title.value,
+    keywords:title.value,
+    ogTitle: title.value,
+    description: description,
+    ogDescription: description,
+    ogImage: data.coverImg??'',
+    twitterImage: data.coverImg??'',
+    twitterCard: 'summary_large_image',
+  })
+} catch (error) {
+  info.value = {}
+  loading.value = false
+  console.log('error',error)
+}
 
-console.log('info.value',info.value)
 
-// useSeoMeta({
-//   title: title,
-//   keywords:keywords,
-//   ogTitle: title,
-//   description: description,
-//   ogDescription: description,
-// })
 </script>
 <style scoped>
 .child {
-  @apply invisible;
+  @apply lg:invisible;
 }
 
 .prev:hover .child,
 .next:hover .child {
   @apply visible;
+}
+.content :deep(p) {
+  margin-bottom: 12px;
+  word-break: break-all;
+}
+.content :deep(img) {
+  max-width: 100%;
+}
+.content :deep(video) {
+  width: 100%;
+  height: 480px;
 }
 </style>
