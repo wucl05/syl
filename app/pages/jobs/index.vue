@@ -28,7 +28,7 @@
       </div>
     </div>
   </section>
-  <section class="px-4 2xl:px-0 my-8 sm:my-12 md:my-16 xl:my-20 bg-no-repeat bg-cover bg-center h-[37.5rem] m-auto before:block before:absolute before:-inset-1 before:bg-opacity-90 before:bg-primary-blue relative flex flex-col items-center overflow-hidden" :style="{'background-image': `url(${banner2})`}">
+  <section class="px-4 2xl:px-0 my-8 sm:my-12 md:my-16 xl:my-20 bg-no-repeat bg-cover bg-center h-[37.5rem] m-auto before:block before:absolute before:-inset-1 before:bg-opacity-90 before:bg-primary-blue relative flex flex-col items-center overflow-hidden text-white" :style="{'background-image': `url(${banner2})`}">
     <div class="w-full max-w-main m-auto relative z-10 ">
       <h2 class="font-bold text-4xl mb-8">{{ JobsLang[locale]['jobs']['section2']['title'] }}</h2>
       <div class="before:block before:shrink-0 before:w-[0.38rem] before:h-[0.38rem] before:mt-2 before:mr-2 before:-inset-1 before:bg-primary-yelleow flex mt-4 relative " v-for="(item, index) in JobsLang[locale]['jobs']['section2']['list']" :key="index">
