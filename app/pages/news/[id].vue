@@ -13,8 +13,8 @@
       <h4 class="time mt-[.56rem] text-[#666]">{{ locale !== 'cn' ? info.publishDateEn : info.publishDate }}</h4>
     </div>
     <div class="video-container flex flex-col lg:flex-row items-center justify-space-between lg:gap-10 gap-5">
-      <nuxt-link :to="info.prev.id?`/news/${info.prev.id}`:''" :class="['order-3 lg:order-1 prev sm:flex  flex-shrink-0 items-center justify-start 2xl:w-96 xl:w-80 lg:w-60 w-full md:pl-10 md:pr-5 md:py-4 pl-12 pr-7 py-6 ease-in-out duration-300',info?.prev?.id? 'xl:hover:bg-primary-blue bg-primary-blue lg:bg-transparent cursor-pointer opacity-100' :'h-0 opacity-0']">
-        <div class="md:w-10 md:h-10 2xl:w-16 2xl:h-16 bg-primary-yelleow shrink-0 md:mr-5 2x:mr-7 flex flex-col items-center justify-center">
+      <nuxt-link :to="info.prev.id?`/news/${info.prev.id}`:''" :class="['order-3 lg:order-1 prev flex flex-shrink-0 items-center justify-start 2xl:w-96 xl:w-80 lg:w-60 w-full md:pl-10 md:pr-5 md:py-4 pl-4 lg:pl-12 pr-7 py-6 ease-in-out duration-300',info?.prev?.id? 'xl:hover:bg-primary-blue bg-primary-blue lg:bg-transparent cursor-pointer opacity-100' :'h-0 opacity-0']">
+        <div class="w-16 h-16 bg-primary-yelleow shrink-0 mr-5 2x:mr-7 flex flex-col items-center justify-center">
           <UIcon name="humbleicons:chevron-left" class="w-6 h-6 text-black"></UIcon>
         </div>
         <div class="child line-clamp-2 break-words text-white">{{info.prev.title}}</div>
@@ -23,8 +23,8 @@
         <article v-html="info?.content ?? ''">
         </article>
       </div>
-      <nuxt-link :to="info.next.id?`/news/${info.next.id}`:''" :class="['order-3 lg:order-3 next sm:flex flex-shrink-0 items-center justify-end 2xl:w-96 xl:w-80 lg:w-60 w-full pr-12 pl-7 md:pr-10 md:pl-5 md:py-4 py-6  ease-in-out duration-300',info?.next?.id?'xl:hover:bg-primary-blue bg-primary-blue lg:bg-transparent cursor-pointer opacity-100':'h-0 opacity-0']">
-        <div class="md:w-10 md:h-10 2xl:w-16 2xl:h-16 bg-primary-yelleow shrink-0 md:ml-5 2x:ml-7 flex flex-col items-center justify-center order-2">
+      <nuxt-link :to="info.next.id?`/news/${info.next.id}`:''" :class="['order-3 lg:order-3 next flex flex-shrink-0 items-center justify-end 2xl:w-96 xl:w-80 lg:w-60 w-full pr-4 lg:pr-12 pl-7 md:pr-10 md:pl-5 md:py-4 py-6  ease-in-out duration-300',info?.next?.id?'xl:hover:bg-primary-blue bg-primary-blue lg:bg-transparent cursor-pointer opacity-100':'h-0 opacity-0']">
+        <div class="w-16 h-16 bg-primary-yelleow shrink-0 ml-5 2x:ml-7 flex flex-col items-center justify-center order-2">
           <UIcon name="humbleicons:chevron-right" class="w-6 h-6 text-black"></UIcon>
         </div>
         <div class="child line-clamp-2 break-words text-white order-1">{{info.next.title}}</div>
