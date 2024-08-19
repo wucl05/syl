@@ -44,7 +44,7 @@
       <div class="flex-row lg:flex justify-center gap-5">
         <div class="flex-1" v-for="(item, index) in JobsLang[locale]['jobs']['section3']['list']" :key="index">
           <div class="w-full relative overflow-hidden rounded-lg">
-            <img :src="imgCards[index]" :alt="JobsLang[locale]['jobs']['section1']['title']" class="rounded-lg w-full object-cover block m-auto hover:scale-110 transition delay-150 duration-300 ease-in-out" />
+            <img :src="imgCards[index]" :alt="JobsLang[locale]['jobs']['section1']['title']" class="rounded-lg w-full object-cover block m-auto hover:scale-110 transition duration-500 ease-in-out" />
           </div>
           <div class="p-5 text-black dark:text-white">
             {{ item }}
@@ -59,7 +59,7 @@
 
 </template>
 <script setup lang="ts">
-import { useDebounceFn } from '@vueuse/core';
+// import { useDebounceFn } from '@vueuse/core';
 import banner from '~/assets/images/banner_6.jpg'
 import banner2 from '~/assets/images/banner_7.jpg'
 import imgCard0 from '~/assets/images/jobs_card_0.jpg'
