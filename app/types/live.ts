@@ -20,18 +20,18 @@ export type LiveDetail = LiveItem & {
   prev?: LiveItem
   next?: LiveItem
 }
-export interface LiveResponseData extends ParsedContent {
+
+export type ResopseBase = {
   code: number,
-  data:LiveItem[],
   msg?:string,
-  pages:number,
-  total:number
-}
-export type LiveDetailResponseData = {
-  code: number,
-  data:LiveDetail,
-  msg?:string
   pages?:number,
   total?:number
+}
+export interface LiveResponseData extends ResopseBase,ParsedContent {
+  data:LiveItem[]
+
+}
+export type LiveDetailResponseData = ResopseBase & {
+  data:LiveDetail
 }
 

@@ -9,6 +9,7 @@ export default {
       "links:events:localtion":'Events Location',
       "links:events:no":'Events No',
       "links:jobs":'Join Us',
+      "links:privacy":'Privacy',
       "years":'Years'
   },
   cn: {
@@ -21,6 +22,7 @@ export default {
     "links:events:localtion":'展会地点',
     "links:events:no":'展会号',
     "links:jobs":'加入我们',
+    "links:privacy":'隐私政策',
     "years":'年份'
   },
   ja: {
@@ -33,6 +35,7 @@ export default {
     "links:events:localtion":'展示会場',
     "links:events:no":'展示会番号',
     "links:jobs":'私たちに参加して',
+    "links:privacy":'プライバシーポリシー',
     "years":'年份'
   },
   de: {
@@ -45,6 +48,7 @@ export default {
     "links:events:localtion":'Ausstellungsort',
     "links:events:no":'Ausstellungsnummer',
     "links:jobs":'Schließen Sie sich uns an',
+    "links:privacy":'Datenschutzerklärung',
     "years":'bestimmtes Ausstellungsnummer'
   },
 }

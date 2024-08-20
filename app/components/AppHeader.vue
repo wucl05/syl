@@ -17,7 +17,8 @@ const items = [[
 ]]
 const blackMenuNames = [
   'live-id',
-  'news-id'
+  'news-id',
+  'privacy'
 ]
 const route = useRoute() as RouteLocationNormalizedLoaded;
 const isBlackMenu = computed(()=>{
