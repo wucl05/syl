@@ -11,7 +11,7 @@ export default new (class live extends Http {
    * @return {*}
    */
   liveVideoList(params: LivePagesParams): any {
-    return this.get('/api/open/liveVideo/list', params);
+    return this.get('/api/open/live/list', params);
   }
   /**
    * @description: liveVideoDetail
@@ -21,7 +21,29 @@ export default new (class live extends Http {
    * @param {string} year	年份(可选)
    * @return {*}
    */
-  liveVideoDetail(id: string): any {
-    return this.get(`/api/open/liveVideo/detail/${id}`,);
+  liveVideoDetail(liveId: string): any {
+    return this.get(`/api/open/live/detail/${liveId}`,);
+  }
+  /**
+   * @description: liveVideoList
+   * @param {number} page	当前页	query	true
+   * @param {number} pageSize	分页大小	query	true
+   * @param {string} lang	站点语言标识(cn|en|jap|ger)\n (cn中文|en英文|jap日文|ger德文)
+   * @param {string} year	年份(可选)
+   * @return {*}
+   */
+  videoList(params: LivePagesParams): any {
+    return this.get('/api/open/video/list', params);
+  }
+  /**
+   * @description: liveVideoDetail
+   * @param {number} page	当前页	query	true
+   * @param {number} pageSize	分页大小	query	true
+   * @param {string} lang	站点语言标识(cn|en|jap|ger)\n (cn中文|en英文|jap日文|ger德文)
+   * @param {string} year	年份(可选)
+   * @return {*}
+   */
+  videoDetail(videoId: string): any {
+    return this.get(`/api/open/video/detail/${videoId}`,);
   }
 })();

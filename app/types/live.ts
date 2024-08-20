@@ -13,7 +13,9 @@ export type LiveItem = BaseLiveItem & {
   viewCount?:number
   publishDate?: string
   coverImg?: string
-  author?: string
+  author?: string,
+  liveStatus?:string
+  canPlayback?:boolean
 }
 export type LiveDetail = LiveItem & {
   videoUrl?:string

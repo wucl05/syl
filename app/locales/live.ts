@@ -2,6 +2,7 @@ export default {
   en: {
       "links:home":'Home',
       "links:live":'Live',
+      "links:video":'Video',
       "links:news":'News and Events',
       "links:newsDetail":'Company News',
       "links:events":'Events',
@@ -14,7 +15,8 @@ export default {
   },
   cn: {
     "links:home":'首页',
-    "links:live":'视频直播',
+    "links:live":'直播',
+    "links:video":'视频',
     "links:news":'新闻与活动',
     "links:newsDetail":'企业新闻',
     "links:events":'展会及活动',
@@ -27,7 +29,8 @@ export default {
   },
   ja: {
     "links:home":'トップページ',
-    "links:live":'動画の生放送',
+    "links:live":'生放送',
+    "links:video":'ビデオ',
     "links:news":'ニュースとイベント',
     "links:newsDetail":'会社ニュース',
     "links:events":'展示会とイベント',
@@ -40,7 +43,8 @@ export default {
   },
   de: {
     "links:home":'Home',
-    "links:live":'Startseite',
+    "links:live":'Live-Übertragung',
+    "links:video":'Video',
     "links:news":'Nachrichten und Veranstaltungen',
     "links:newsDetail":'Unternehmensnachrichten',
     "links:events":'Exhibit',

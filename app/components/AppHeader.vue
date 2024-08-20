@@ -17,6 +17,7 @@ const items = [[
 ]]
 const blackMenuNames = [
   'live-id',
+  'video-id',
   'news-id',
   'privacy'
 ]

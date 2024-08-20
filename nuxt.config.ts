@@ -46,7 +46,7 @@ export default defineNuxtConfig({
   i18n: {
     vueI18n: './i18n.config.ts' // if you are using custom path, default
   },
-  css: ['~/assets/css/tailwind.css',"animate.css"],
+  css: ['~/assets/css/tailwind.css',"animate.css",],
   tailwindcss: {
   },
 
@@ -101,7 +101,7 @@ export default defineNuxtConfig({
       apiBase: process.env.NUXT_PUBLIC_API_BASE_URL,
     },
   },
-  // plugins: [{ src: '@/plugins/error.js', ssr: true }],
+  // plugins: [{src:'@/plugins/videoplayer',ssr:false}],
   proxy: {
     '/api': {
       target: process.env.NUXT_PUBLIC_API_BASE_URL,

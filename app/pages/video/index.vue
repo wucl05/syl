@@ -65,10 +65,10 @@ const tableData = ref({
   total:0
 })
 
-const title = lang[locale.value]['links:live'];
+const title = lang[locale.value]['links:video'];
 try {
   loading.value = true
-  const {total=0,data:list=[]} = await liveApi.liveVideoList(pageParams.value);
+  const {total=0,data:list=[]} = await liveApi.videoList(pageParams.value);
   loading.value = false
   const keywords = list?.map((item:LiveItem)=>item.title).join(',')??'';
   const description = `${title},${keywords}`
@@ -128,7 +128,12 @@ const links = [
     to: '/'
   },
   {
-    label: lang[locale.value]['links:live'],
+    label: lang[locale.value]['links:news'],
+    labelClass:'text-black dark:text-white sm:text-white',
+    to: '/news'
+  },
+  {
+    label: lang[locale.value]['links:video'],
     labelClass:'text-black dark:text-white sm:text-white opacity-70'
   }
 ]
@@ -141,7 +146,7 @@ const handleClickTab = useDebounceFn(async(year:number)=>{
 },300)
 const handleClickItem = (item:LiveItem) => {
   navigateTo({
-    path: `/live/${item.id}`,
+    path: `/video/${item.id}`,
   });
 }
 </script>
