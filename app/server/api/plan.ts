@@ -1,5 +1,5 @@
 import Http from '../http';
-export default new (class events extends Http {
+export default new (class plans extends Http {
   /**
    * @description: 获取方案选项列表
    * @return {*}
