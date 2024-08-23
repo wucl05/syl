@@ -19,6 +19,7 @@ const blackMenuNames = [
   'live-id',
   'video-id',
   'news-id',
+  'plan-id',
   'privacy'
 ]
 const route = useRoute() as RouteLocationNormalizedLoaded;

@@ -11,6 +11,7 @@ export default {
       "links:events:no":'Events No',
       "links:jobs":'Join Us',
       "links:privacy":'Privacy',
+      "buy":'purchased product',
       "years":'Years'
   },
   cn: {
@@ -25,6 +26,7 @@ export default {
     "links:events:no":'展会号',
     "links:jobs":'加入我们',
     "links:privacy":'隐私政策',
+    "buy":'购买产品',
     "years":'年份'
   },
   ja: {
@@ -39,6 +41,7 @@ export default {
     "links:events:no":'展示会番号',
     "links:jobs":'私たちに参加して',
     "links:privacy":'プライバシーポリシー',
+    "buy":'製品の購入',
     "years":'年份'
   },
   de: {
@@ -53,6 +56,7 @@ export default {
     "links:events:no":'Ausstellungsnummer',
     "links:jobs":'Schließen Sie sich uns an',
     "links:privacy":'Datenschutzerklärung',
+    "buy":'Produkte kaufen',
     "years":'bestimmtes Ausstellungsnummer'
   },
 }
