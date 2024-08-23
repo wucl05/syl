@@ -11,6 +11,11 @@
       },
     }" >
     </UBreadcrumb>
+    <div class="bg-[#F6F7F9] mt-4 sm:mt-0 -mx-4">
+      <div class="flex items-center gap-4 p-2 max-w-main m-auto ">
+        <NuxtLink :to="item.value" class="px-5 py-2 font-semibold text-black rounded hover:bg-primary-blue hover:text-white" :class="{'bg-primary-blue text-white': item.value === `/${$route.name}`}" v-for="(item,idx) in tabs" :key="idx">{{ item.label }}</NuxtLink>
+      </div>
+    </div>
     <nav class="mt-10 md:mt-14 flex items-center gap-6 overflow-x-auto pr-4 hide-scrollbar">
       <span
         v-for="item in years"
@@ -64,7 +69,16 @@ const tableData = ref({
   list:[],
   total:0
 })
-
+const tabs = ref([
+  {
+    label: lang[locale.value]['links:video'],
+    value: '/video',
+  },
+  {
+    label: lang[locale.value]['links:live'],
+    value: '/live',
+  }
+])
 const title = lang[locale.value]['links:video'];
 try {
   loading.value = true
