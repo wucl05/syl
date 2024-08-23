@@ -102,7 +102,6 @@ export default defineNuxtConfig({
       lang: process.env.NUXT_PUBLIC_LANG || 'cn',
     },
   },
-  // plugins: [{src:'@/plugins/videoplayer',ssr:false}],
   proxy: {
     '/api': {
       target: process.env.NUXT_PUBLIC_API_BASE_URL,

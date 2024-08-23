@@ -12,9 +12,11 @@ const fetch = (url: string, options:UseFetchOptions<T>={}, headers: Record<strin
   const key = hash(JSON.stringify(options) + url);
 
   // 可以设置默认headers例如
+  const { $i18n } = useNuxtApp()
+  const locale = $i18n.locale.value
   const customHeaders = {
     'Content-Type': 'application/json;charset=UTF-8',
-    'language': lang,
+    'language': locale ||lang,
     ...headers
   };
 

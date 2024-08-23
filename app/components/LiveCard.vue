@@ -7,6 +7,8 @@
       <div class="aspect-w-16 aspect-h-9">
         <img :src="item.coverImg" :alt="item.title" class="w-full h-full object-cover" />
       </div>
+      <!-- status -->
+      <div v-if="item.liveStatus || item.canPlayback" :class="['absolute bottom-0 right-0 z-10 text-sm px-1 py-[0.13rem]',`status-${item.liveStatus}`, item.canPlayback?'status-2':'']">{{ item.canPlayback ? '回放' : statusEnum[item.liveStatus] }}</div>
     </div>
     <div :class="[isFlex?'flex-1 sm:flex-auto w-full sm:w-[76%] flex flex-col justify-between':'mt-4']">
       <h3 class="text-xl text-black font-bold dark:text-white line-clamp-2 break-words">{{ item.title }}</h3>
@@ -50,6 +52,12 @@ const props =defineProps({
     default:false
   }
 })
+//直播状态(0预告,1直播中,2直播结束)
+const statusEnum = {
+  '0':'预告',
+  '1':'直播中',
+  '2':'直播结束'
+}
 const emits = defineEmits(['clickItem','play'])
 const handleClickItem = useDebounceFn((type:number) => {
   if(props.disabled) return
@@ -64,3 +72,14 @@ const handleClickItem = useDebounceFn((type:number) => {
   maxWait: 1000,
 })
 </script>
+<style scoped>
+.status-0{
+  @apply bg-primary-yelleow text-primary-blue
+}
+.status-1{
+  @apply bg-primary-blue text-primary-yelleow
+}
+.status-2{
+  @apply bg-gray-300 text-white
+}
+</style>

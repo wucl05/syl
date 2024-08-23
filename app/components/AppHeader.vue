@@ -15,6 +15,10 @@ const items = [[
     click: () => setLocale("en")
   }
 ]]
+const {
+    public: { lang },
+  } = useRuntimeConfig();
+setLocale(lang)
 const blackMenuNames = [
   'live-id',
   'video-id',
