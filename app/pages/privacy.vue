@@ -40,12 +40,7 @@ const loading = ref(false)
 const info:PrivacyDeatil = ref({})
 try {
   loading.value = true
-  const res:PrivacyResponseData<PrivacyDeatil>  = await privacyApi.privacyDetail({
-    lang:locale.value
-  });
-  console.log('res===',res,{
-    lang:locale.value
-  })
+  const res:PrivacyResponseData<PrivacyDeatil>  = await privacyApi.privacyDetail();
   const {data} = res
   info.value = data ?? {}
   loading.value = false

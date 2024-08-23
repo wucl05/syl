@@ -4,7 +4,7 @@ import { hash } from 'ohash';
 
 const fetch = (url: string, options:UseFetchOptions<T>={}, headers: Record<string, string> = {}, handleError: any) => {
   const {
-    public: { apiBase },
+    public: { apiBase,lang },
   } = useRuntimeConfig(); // 3.0正式版环境变量要从useRuntimeConfig里的public拿
   const reqUrl:string = apiBase + url; // 你的接口地址
 
@@ -14,7 +14,8 @@ const fetch = (url: string, options:UseFetchOptions<T>={}, headers: Record<strin
   // 可以设置默认headers例如
   const customHeaders = {
     'Content-Type': 'application/json;charset=UTF-8',
-    ...headers,
+    'language': lang,
+    ...headers
   };
 
   return new Promise((resolve, reject) => {

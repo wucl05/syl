@@ -57,7 +57,7 @@ const loading = ref(true)
 const pageParams=ref({
   page:1,
   pageSize:9,
-  lang:locale.value,
+  // lang:locale.value,
   year:curYear.value === 999 ? '':curYear.value
 })
 const tableData = ref({
