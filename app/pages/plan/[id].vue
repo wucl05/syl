@@ -18,7 +18,7 @@
         </UBreadcrumb>
     </div>
   </section>
-  <section class="bg-no-repeat bg-cover bg-center w-full lg:aspect-[120/47.06] m-auto text-center text-black" :style="{'background-image': `url(${bannerCard})`}">
+  <section class="bg-white bg-no-repeat bg-cover bg-center w-full lg:aspect-[120/47.06] m-auto text-center text-black" :style="{'background-image': `url(${bannerCard})`}">
     <h2 class="mb-4 xl:text-[2.75rem] text-2xl font-semibold">{{planLang[locale]['plan:advantages']}}</h2>
     <p>{{ info.advantageDesc }}</p>
     <div class="gap-4 px-4 xl:px-0 flex items-center overflow-x-auto hide-scrollbar m-auto max-w-main mt-20">
