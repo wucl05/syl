@@ -47,7 +47,7 @@
   </section>
   <section class="w-full m-auto text-center bg-[#F6F7F9] text-black py-5 px-4 xl:px-0 lg:py-24">
     <div class="max-w-main m-auto">
-      <h2 class="mb-4 xl:text-[2.75rem] text-2xl font-semibold">{{planLang[locale]['plan:recommendation']}}</h2>
+      <h2 class="md:mb-8 mb-5 xl:text-[2.75rem] text-2xl font-semibold">{{planLang[locale]['plan:recommendation']}}</h2>
       <UCarousel
         :items="info.productList"
         :ui="{
@@ -184,16 +184,31 @@
       <NuxtLink to="/" class="lg:hidden mt-12 block px-4 text-black cursor-pointer leading-8 border-2 border-black border-solid text-center box-border hover:border-primary-blue hover:bg-primary-blue hover:text-white transition delay-150 duration-300 ease-in-out">{{ planLang[locale]['plan:more'] }}</NuxtLink>
     </div>
   </section>
+  <section class="m-auto flex-row md:flex items-center justify-center">
+    <NuxtLink click="handleClick" class="w-full md:w-1/2 flex py-10 items-center justify-center bg-[#F4F5F5] cursor-pointer">
+      <img :src="msgImg" class="w-14 h-14 md:w-20 md:h-20 mr-4"/>
+      <h4 class="text-lg md:text-[1.75rem]">{{ planLang[locale]['plan:buy'] }}</h4>
+      <Icon class="md:text-lg" name="i-heroicons:chevron-right"></Icon>
+    </NuxtLink>
+    <NuxtLink to="/" class="w-full md:w-1/2 flex py-10 items-center justify-center bg-[#EBEFF2] cursor-pointer">
+      <img :src="rocketImg" class="w-14 h-14 md:w-20 md:h-20 mr-4"/>
+      <h4 class="text-lg md:text-[1.75rem]">{{ planLang[locale]['plan:contact'] }}</h4>
+      <Icon class="md:text-lg" name="i-heroicons:chevron-right"></Icon>
+    </NuxtLink>
+  </section>
 </template>
 <script setup lang='ts'>
-import { useWindowSize } from '@vueuse/core'
+import type { RouteLocationNormalizedLoaded } from 'vue-router';
+import { useWindowSize,useDebounceFn } from '@vueuse/core'
 import bannerCard from '~/assets/images/banner_10.jpg'
+import msgImg from 'icons/msg.svg'
+import rocketImg from 'icons/rocket.svg'
 import type { Solution,SolutionResponseData } from '~/types/plan'
 import lang from 'locales/live'
 import planLang from 'locales/plan'
 const { locale } = useI18n()
 const { planApi } = useApi();
-const route = useRoute();
+const route = useRoute() as RouteLocationNormalizedLoaded;
 const { width } = useWindowSize()
 const { id } = route.params;
 console.log('route',route.name)
@@ -242,9 +257,12 @@ try {
   console.log('error',error)
 }
 
-const handleClick = () => {
+const handleClick = useDebounceFn(() => {
   console.log('点击产品')
-}
+},100,
+{
+  maxWait: 1000,
+})
 </script>
 <style scoped>
 .child {
