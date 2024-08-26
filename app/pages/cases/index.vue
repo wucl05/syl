@@ -98,7 +98,6 @@ try {
       countryId:params.countryId === 'all' ? '' : params.countryId,
       districtId:params.districtId === 'all' ? '' : params.districtId,
     });
-  console.log('list==',list)
   loading.value = false
   tableData.value.list = []
   const keywords = list?.map((item:SuccessCase)=>item.title).join(',')??'';
@@ -119,13 +118,12 @@ try {
     // description: description,
     keywords:keywords
   })
-  console.log('list',list)
   tableData.value = {
     total,
     list
   }
 } catch (error) {
-  console.log('新闻服务异常',error)
+  console.log('服务异常',error)
   tableData.value = {
     total:0,
     list:[]
@@ -183,7 +181,6 @@ watchDebounced(()=>pageParams.value,()=>{
     maxWait: 1000
 })
 watchDebounced(()=>countryId.value,(n)=>{
-  console.log('n',n)
   pageParams.value.districtId = n
   if(n==='all'){
     pageParams.value.countryId = 'all'
