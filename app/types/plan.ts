@@ -27,7 +27,7 @@ interface Product {
   categoryId: number;
 }
 
-interface SuccessCase {
+export interface SuccessCase {
   id: number;
   title: string;
   coverImg?: string;

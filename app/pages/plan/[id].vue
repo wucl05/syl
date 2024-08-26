@@ -135,7 +135,7 @@
     <div class="max-w-main m-auto">
       <div class="flex items-center justify-between mb-12">
         <h2 class="xl:text-[2.75rem] text-2xl font-semibold">{{planLang[locale]['plan:cases']}}</h2>
-        <NuxtLink to="/" class="hidden lg:inline-block px-4 text-black cursor-pointer md:min-w-[9.75rem] leading-8 border-2 border-black border-solid text-center box-border hover:border-primary-blue hover:bg-primary-blue hover:text-white transition delay-150 duration-300 ease-in-out">{{ planLang[locale]['plan:more'] }}</NuxtLink>
+        <NuxtLink :to="`/cases?id=${id}`" class="hidden lg:inline-block px-4 text-black cursor-pointer md:min-w-[9.75rem] leading-8 border-2 border-black border-solid text-center box-border hover:border-primary-blue hover:bg-primary-blue hover:text-white transition delay-150 duration-300 ease-in-out">{{ planLang[locale]['plan:all'] }}</NuxtLink>
       </div>
       <UCarousel
         :items="info.successCaseList"
@@ -181,7 +181,7 @@
           <div :class="['w-12 h-[3px] bg-black cursor-pointer',active?'':'bg-opacity-20']" @click="onClick(page)"></div>
         </template>
       </UCarousel>
-      <NuxtLink to="/" class="lg:hidden mt-12 block px-4 text-black cursor-pointer leading-8 border-2 border-black border-solid text-center box-border hover:border-primary-blue hover:bg-primary-blue hover:text-white transition delay-150 duration-300 ease-in-out">{{ planLang[locale]['plan:more'] }}</NuxtLink>
+      <NuxtLink :to="`/cases?id=${id}`" class="lg:hidden mt-12 block px-4 text-black cursor-pointer leading-8 border-2 border-black border-solid text-center box-border hover:border-primary-blue hover:bg-primary-blue hover:text-white transition delay-150 duration-300 ease-in-out">{{ planLang[locale]['plan:all'] }}</NuxtLink>
     </div>
   </section>
   <section class="m-auto flex-row md:flex items-center justify-center">

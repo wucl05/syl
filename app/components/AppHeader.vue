@@ -24,7 +24,8 @@ const blackMenuNames = [
   'video-id',
   'news-id',
   'plan-id',
-  'privacy'
+  'privacy',
+  'cases'
 ]
 const route = useRoute() as RouteLocationNormalizedLoaded;
 const isBlackMenu = computed(()=>{

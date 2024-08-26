@@ -1,49 +1,53 @@
 <template>
   <section class="banner flex flex-col bg-no-repeat bg-cover bg-center w-full md:min-h-[400px] min-h-60 m-auto" :style="{'background-image': `url(${banner})`}">
-    <div class="p-4 max-w-main m-auto w-full text-white text-left">
+    <div class="p-4 lg:p-0 max-w-main m-auto w-full text-white text-left">
       <h1 class="text-2xl sm:text-3xl md:text-4xl xl:text-5xl">{{ title }}</h1>
     </div>
   </section>
-  <div class="pl-4 pr-4 max-w-main m-auto box-border">
-    <UBreadcrumb :links="links" class="sm:-mt-[1.8rem] mt-[1rem]" :ui="{
-      divider: {
-        base: 'flex-shrink-0 w-5 h-5 rtl:rotate-180 sm:text-white text-black dark:text-white sm:opacity-70',
-      },
-    }" >
-    </UBreadcrumb>
+  <div class="pl-4 pr-4 m-auto box-border">
+    <div class="max-w-main m-auto">
+      <UBreadcrumb :links="links" class="sm:-mt-[1.8rem] mt-[1rem]" :ui="{
+        divider: {
+          base: 'flex-shrink-0 w-5 h-5 rtl:rotate-180 sm:text-white text-black dark:text-white sm:opacity-70',
+        },
+      }" >
+      </UBreadcrumb>
+    </div>
     <div class="bg-[#F6F7F9] mt-4 sm:mt-0 -mx-4">
       <div class="flex items-center gap-4 p-2 max-w-main m-auto ">
         <NuxtLink :to="item.value" class="px-5 py-2 font-semibold text-black rounded hover:bg-primary-blue hover:text-white" :class="{'bg-primary-blue text-white': item.value === `/${$route.name}`}" v-for="(item,idx) in tabs" :key="idx">{{ item.label }}</NuxtLink>
       </div>
     </div>
-    <nav class="mt-10 md:mt-14 flex items-center gap-6 overflow-x-auto pr-4 hide-scrollbar">
-      <span
-        v-for="item in years"
-        :key="item"
-       class="py-[0.31rem] px-[0.75rem] rounded-[1rem] whitespace-nowrap transition ease-in-out cursor-pointer hover:bg-light-gray-1 dark:hover:bg-black hover:font-bold"
-       :class="{'bg-light-gray-1 font-bold dark:bg-black':curYear===item}"
-       @click="handleClickTab(item)">
-       {{item===999?lang[locale]['years']:item}}
-      </span>
-    </nav>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 pb-10 md:mt-12">
-      <LiveCard
-        v-for="item in tableData.list"
-        :item="item"
-        :key="item.id"
-        :isVideo="true"
-        @clickItem="handleClickItem(item)"
-        @play="handleClickItem(item)"
-        >
-      </LiveCard>
-    </div>
-    <div v-if="tableData.total>pageParams.pageSize" class="flex justify-center mb-10">
-      <UPagination
-        v-model="pageParams.page"
-        :page-count="pageParams.pageSize"
-        :active-button="{ color: 'black' }"
-        :total="tableData.total"
-      />
+    <div class="max-w-main m-auto">
+      <nav class="mt-10 md:mt-14 flex items-center gap-6 overflow-x-auto pr-4 hide-scrollbar">
+        <span
+          v-for="item in years"
+          :key="item"
+         class="py-[0.31rem] px-[0.75rem] rounded-[1rem] whitespace-nowrap transition ease-in-out cursor-pointer hover:bg-light-gray-1 dark:hover:bg-black hover:font-bold"
+         :class="{'bg-light-gray-1 font-bold dark:bg-black':curYear===item}"
+         @click="handleClickTab(item)">
+         {{item===999?lang[locale]['years']:item}}
+        </span>
+      </nav>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 pb-10 md:mt-12">
+        <LiveCard
+          v-for="item in tableData.list"
+          :item="item"
+          :key="item.id"
+          :isVideo="true"
+          @clickItem="handleClickItem(item)"
+          @play="handleClickItem(item)"
+          >
+        </LiveCard>
+      </div>
+      <div v-if="tableData.total>pageParams.pageSize" class="flex justify-center mb-10">
+        <UPagination
+          v-model="pageParams.page"
+          :page-count="pageParams.pageSize"
+          :active-button="{ color: 'black' }"
+          :total="tableData.total"
+        />
+      </div>
     </div>
   </div>
 
