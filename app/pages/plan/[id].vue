@@ -79,7 +79,7 @@
               {{ item.name }}
               </h3>
               <p class="text-sm mt-3 text-gray-400">{{ item.categoryName }}</p>
-              <NuxtLink @click="handleClick" class="btn text-black cursor-pointer mx-auto mt-7 mb-16 w-full md:w-[9.75rem] leading-8 border border-black border-solid text-center inline-block box-border hover:border-primary-blue hover:bg-primary-blue hover:text-white transition delay-150 duration-300 ease-in-out">{{ planLang[locale]['plan:more'] }}</NuxtLink>
+              <NuxtLink to="/" class="btn text-black cursor-pointer mx-auto mt-7 mb-16 w-full md:w-[9.75rem] leading-8 border border-black border-solid text-center inline-block box-border hover:border-primary-blue hover:bg-primary-blue hover:text-white transition delay-150 duration-300 ease-in-out">{{ planLang[locale]['plan:more'] }}</NuxtLink>
             </div>
           </div>
         </template>
