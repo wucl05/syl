@@ -61,7 +61,7 @@ import planLang from 'locales/plan'
 import type { SolutionOptionsResponseData,SuccessCase } from '~/types/plan'
 import { fetchWithoutCookie } from 'hooks/fetch'
 const { locale } = useI18n()
-const { casesApi } = useApi();
+const { casesApi,planApi } = useApi();
 const route = useRoute() as RouteLocationNormalizedLoaded;
 const { id='' } = route.query;
 const links = [
@@ -155,9 +155,13 @@ const productList = ref([{
   name: casesLang[locale.value]['cases:solutions'],
   value: 'all'
 }])
-const productRes = await casesApi.productCategories();
-const productArr = productRes?.data?.map((item:Options)=>({
-  name:item.name,
+const productRes = await planApi.getSolutionOptions();
+type ProdOptions = {
+  title: string;
+  id: string;
+}
+const productArr = productRes?.data?.map((item:ProdOptions)=>({
+  name:item.title,
   value:item.id
 })) ?? []
 if(productArr.length && id){
