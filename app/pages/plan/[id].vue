@@ -24,10 +24,10 @@
     <div class="gap-4 px-4 xl:px-0 flex items-center overflow-x-auto hide-scrollbar m-auto max-w-main mt-20">
       <div v-for="(item,index) in info.solutionAdvantageList" :key="index" class="card cursor-pointer w-[16.88rem] h-[21.25rem] box-border py-8 px-5 shrink-0 bg-white overflow-hidden relative">
         <div class="card-child-0 py-8 px-5 transition-all duration-300 ease-in-out w-full h-full bg-white box-border border-b-4 border-solid absolute z-10 top-0 left-0 translate-y-0 opacity-100">
-          <div class="w-[7.75rem] h-[7.75rem] m-auto mt-2">
+          <div v-if="item.icon" class="w-[7.75rem] h-[7.75rem] m-auto mt-2">
             <img :alt="item.title" :src="item.icon" class="w-full h-full object-cover block" />
           </div>
-          <h4 class="font-semibold mt-7">{{ item.title }}</h4>
+          <h4 :class="['font-semibold',item.icon?'mt-7':'mt-2']">{{ item.title }}</h4>
           <p class="text-gray-500 line-clamp-3 text-sm mt-5">{{ item.describe }}</p>
         </div>
         <div class="card-child transition-all duration-300 ease-in-out w-full h-full bg-white box-border border-b-4 border-[#373277] border-solid absolute z-20 top-0 left-0 translate-y-full opacity-0">

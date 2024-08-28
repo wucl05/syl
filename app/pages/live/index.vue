@@ -39,6 +39,7 @@
           @play="handleClickItem(item)"
           >
         </LiveCard>
+        <Empty :type="emptyType" v-if="tableData.total===0 && !loading" />
       </div>
       <div v-if="tableData.total>pageParams.pageSize" class="flex justify-center mb-10">
         <UPagination
@@ -84,8 +85,10 @@ const tabs = ref([
   }
 ])
 const title = lang[locale.value]['links:live'];
+const emptyType = ref('empty')
 try {
   loading.value = true
+  emptyType.value = 'empty'
   const {total=0,data:list=[]} = await liveApi.liveVideoList(pageParams.value);
   loading.value = false
   const keywords = list?.map((item:LiveItem)=>item.title).join(',')??'';
@@ -113,6 +116,8 @@ try {
   }
 } catch (error) {
   console.log('直播服务异常',error)
+  loading.value = false
+  emptyType.value = 'error'
   tableData.value = {
     total:0,
     list:[]
@@ -120,6 +125,8 @@ try {
 }
 const init = async () => {
   try {
+    loading.value = true
+    emptyType.value = 'empty'
     const res:LiveResponseData = await fetchWithoutCookie('/api/open/liveVideo/list',{
       params:pageParams.value,
       method: 'GET',
@@ -129,7 +136,10 @@ const init = async () => {
       total:res?.total ?? 0,
       list:list
     }
+    loading.value = false
   } catch (error) {
+    loading.value = false
+    emptyType.value = 'error'
     tableData.value = {
       total: 0,
       list:[]
@@ -144,6 +154,11 @@ const links = [
     label: lang[locale.value]['links:home'],
     labelClass:'text-black dark:text-white sm:text-white',
     to: '/'
+  },
+  {
+    label: lang[locale.value]['links:news'],
+    labelClass:'text-black dark:text-white sm:text-white',
+    to: '/news'
   },
   {
     label: lang[locale.value]['links:live'],

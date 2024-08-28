@@ -25,7 +25,7 @@
         </div>
         <div class="child line-clamp-2 break-words text-white">{{info.prev.title}}</div>
       </nuxt-link>
-      <div class="max-w-[55.75rem] w-full m-auto flex-1  content order-2 lg:order-2">
+      <div class="max-w-[55.75rem] w-full m-auto flex-1 sm:px-4 lg:px-0 content order-2 lg:order-2 pb-4 xl:pb-8">
         <div class="relative aspect-w-16 aspect-h-9">
           <video ref="video" class="w-full h-full bg-black" crossorigin="anonymous"
             :loop="true"
