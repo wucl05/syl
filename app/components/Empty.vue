@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col justify-center items-center w-full h-full m-auto">
-    <img :src="img || info.img" class="max-w-full block m-auto min-h-1" />
+    <img :src="img || info.img" class="max-w-full block m-auto min-h-1 w-[191px]" />
     <p class="mt-4 2xl:mt-6 text-lg xl:text-xl  2xl:text-2xl text-gray-400">{{ text || info.text }}</p>
   </div>
 </template>
@@ -20,6 +20,14 @@ const props = defineProps({
   img: {
     type: String,
     default: ''
+  },
+  imgWidth:{
+    type: Number,
+    default: 200
+  },
+  imgHeight:{
+    type: Number,
+    default: 200
   },
   text:{
     type: String,

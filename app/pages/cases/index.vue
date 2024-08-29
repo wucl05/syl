@@ -42,6 +42,7 @@
         </div>
       </div>
     </div>
+    <Empty type="emptyType" v-if="tableData.total===0 && !loading" />
     <div v-if="tableData.total>pageParams.pageSize" class="flex justify-center mb-10">
       <UPagination
         v-model="pageParams.page"
@@ -78,7 +79,7 @@ const links = [
 const loading = ref(false)
 const pageParams=ref({
   page:1,
-  pageSize:6,
+  pageSize:1,
   key: '',
   countryId: '', // 国家id
   districtId: '', // 区域Id
@@ -99,7 +100,6 @@ try {
       districtId:params.districtId === 'all' ? '' : params.districtId,
     });
   loading.value = false
-  tableData.value.list = []
   const keywords = list?.map((item:SuccessCase)=>item.title).join(',')??'';
   // const description = list?.map((item:SuccessCase)=>item.summary).join(',')??'';
   useSeoMeta({

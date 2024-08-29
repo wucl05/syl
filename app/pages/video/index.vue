@@ -39,8 +39,8 @@
           @play="handleClickItem(item)"
           >
         </LiveCard>
-      <Empty :type="emptyType" v-if="tableData.total===0 && !loading" />
       </div>
+      <Empty :type="emptyType" v-if="tableData.total===0 && !loading" />
       <div v-if="tableData.total>pageParams.pageSize" class="flex justify-center mb-10">
         <UPagination
           v-model="pageParams.page"
@@ -54,7 +54,7 @@
 
 </template>
 <script setup lang="ts">
-import { useDebounceFn } from '@vueuse/core';
+import { useDebounceFn,watchDebounced,toValue } from '@vueuse/core';
 import type { LiveItem,LiveResponseData } from '~/types/live'
 import banner from '~/assets/images/banner_4.jpg'
 import lang from 'locales/live'
@@ -127,16 +127,20 @@ const init = async () => {
   try {
     loading.value = true
     emptyType.value = 'empty'
-    const res:LiveResponseData = await fetchWithoutCookie('/api/open/liveVideo/list',{
-      params:pageParams.value,
+    const res:LiveResponseData = await fetchWithoutCookie('/api/open/video/list',{
+      params:toValue(pageParams.value),
       method: 'GET',
     });
     const list = res?.data ?? [];
-    tableData.value = {
-      total:res?.total ?? 0,
-      list:list
-    }
+    // tableData.value = {
+    //   total:res?.total ?? 0,
+    //   list:list
+    // }
+    console.log('list==',res,list)
+    tableData.value.list = list
+    tableData.value.total = res?.total ?? 0
     loading.value = false
+    return Promise.resolve()
   } catch (error) {
     loading.value = false
     emptyType.value = 'error'
@@ -145,6 +149,7 @@ const init = async () => {
       list:[]
     }
     console.log('请求失败',error)
+    return Promise.resolve(false)
   }
 }
 // init(true)
@@ -165,13 +170,19 @@ const links = [
     labelClass:'text-black dark:text-white sm:text-white opacity-70'
   }
 ]
-
 const handleClickTab = useDebounceFn(async(year:number)=>{
   await handleClickYear(year)
   pageParams.value.year = year === 999 ? '':year
   pageParams.value.page = 1
-  init()
 },300)
+watchDebounced(()=>pageParams.value,(n)=>{
+  init()
+},
+  {
+    deep:true,
+    debounce: 10,
+    maxWait: 5000
+})
 const handleClickItem = (item:LiveItem) => {
   navigateTo({
     path: `/video/${item.id}`,

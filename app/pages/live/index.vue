@@ -39,8 +39,8 @@
           @play="handleClickItem(item)"
           >
         </LiveCard>
-        <Empty :type="emptyType" v-if="tableData.total===0 && !loading" />
       </div>
+      <Empty :type="emptyType" v-if="tableData.total===0 && !loading" />
       <div v-if="tableData.total>pageParams.pageSize" class="flex justify-center mb-10">
         <UPagination
           v-model="pageParams.page"
@@ -54,7 +54,7 @@
 
 </template>
 <script setup lang="ts">
-import { useDebounceFn } from '@vueuse/core';
+import { useDebounceFn,watchDebounced } from '@vueuse/core';
 import type { LiveItem,LiveResponseData } from '~/types/live'
 import banner from '~/assets/images/banner_4.jpg'
 import lang from 'locales/live'
@@ -127,7 +127,7 @@ const init = async () => {
   try {
     loading.value = true
     emptyType.value = 'empty'
-    const res:LiveResponseData = await fetchWithoutCookie('/api/open/liveVideo/list',{
+    const res:LiveResponseData = await fetchWithoutCookie('/api/open/live/list',{
       params:pageParams.value,
       method: 'GET',
     });
@@ -147,6 +147,14 @@ const init = async () => {
     console.log('请求失败',error)
   }
 }
+watchDebounced(()=>pageParams.value,()=>{
+  init()
+},
+  {
+    deep:true,
+    debounce: 100,
+    maxWait: 5000
+})
 // init(true)
 // 链接
 const links = [
@@ -170,7 +178,6 @@ const handleClickTab = useDebounceFn(async(year:number)=>{
   await handleClickYear(year)
   pageParams.value.year = year === 999 ? '':year
   pageParams.value.page = 1
-  init()
 },300)
 const handleClickItem = (item:LiveItem) => {
   navigateTo({

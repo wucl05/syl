@@ -12,7 +12,7 @@ export default {
       "links:jobs":'Join Us',
       "links:privacy":'Privacy',
       "buy":'purchased product',
-      "years":'Years'
+      "years":'All'
   },
   cn: {
     "links:home":'首页',
@@ -27,7 +27,7 @@ export default {
     "links:jobs":'加入我们',
     "links:privacy":'隐私政策',
     "buy":'购买产品',
-    "years":'年份'
+    "years":'全部'
   },
   ja: {
     "links:home":'トップページ',
@@ -42,7 +42,7 @@ export default {
     "links:jobs":'私たちに参加して',
     "links:privacy":'プライバシーポリシー',
     "buy":'製品の購入',
-    "years":'年份'
+    "years":'すべて'
   },
   de: {
     "links:home":'Home',
@@ -57,6 +57,6 @@ export default {
     "links:jobs":'Schließen Sie sich uns an',
     "links:privacy":'Datenschutzerklärung',
     "buy":'Produkte kaufen',
-    "years":'bestimmtes Ausstellungsnummer'
+    "years":'ganz'
   },
 }

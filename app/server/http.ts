@@ -22,36 +22,36 @@ const fetch = (url: string, options:UseFetchOptions<T>={}, headers: Record<strin
 
   return new Promise((resolve, reject) => {
     useFetch(reqUrl, { ...options, key, headers: customHeaders })
-        .then(({ data, error }) => {
-          if (error.value) {
-            console.log('error.value',error.value)
-            const { code=null, msg = '' } = error.value?.data ?? {};
-            if (!handleError && code !== 0 && process.client) {
-              console.log(msg || '服务异常')
-            }
-            reject(error.value.data);
-            return;
+      .then(({ data, error }) => {
+        if (error.value) {
+          console.log('error.value',error.value)
+          const { code=null, msg = '' } = error.value?.data ?? {};
+          if (!handleError && code !== 0 && process.client) {
+            console.log(msg || '服务异常')
           }
-          const value = data.value;
-          if (!value) {
-            throw createError({
-              statusCode: 500,
-              statusMessage: reqUrl,
-              message: '自己后端接口的报错信息',
-            });
-          } else {
-            if (!handleError && value.code !== 0 && process.client) {
-              console.log(value.msg || '服务异常')
-            }
-            resolve(value);
+          reject(error.value.data);
+          return;
+        }
+        const value = data.value;
+        if (!value) {
+          throw createError({
+            statusCode: 500,
+            statusMessage: reqUrl,
+            message: '自己后端接口的报错信息',
+          });
+        } else {
+          if (!handleError && value.code !== 0 && process.client) {
+            console.log(value.msg || '服务异常')
           }
-        })
-        .catch((err) => {
-          if (process.client && !handleError) {
-            console.log(err.msg || '服务异常')
-          }
-          reject(err);
-        });
+          resolve(value);
+        }
+      })
+      .catch((err) => {
+        if (process.client && !handleError) {
+          console.log(err.msg || '服务异常')
+        }
+        reject(err);
+      });
   });
 };
 export default class Http {

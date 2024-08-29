@@ -32,8 +32,8 @@
         @play="handleClickItem(item)"
         >
       </LiveCard>
-      <Empty :type="emptyType" v-if="tableData.total===0 && !loading" />
     </div>
+    <Empty type="emptyType" v-if="tableData.total===0 && !loading" />
     <div v-if="tableData.total>pageParams.pageSize" class="flex justify-center mb-10">
       <UPagination
         v-model="pageParams.page"
@@ -46,7 +46,7 @@
 
 </template>
 <script setup lang="ts">
-import { useDebounceFn } from '@vueuse/core';
+import { useDebounceFn,watchDebounced, } from '@vueuse/core';
 import type { NewsItem,NewsResponseData } from '~/types/news'
 import banner from '~/assets/images/banner_7.jpg'
 import lang from 'locales/live'
@@ -148,13 +148,21 @@ const handleClickTab = useDebounceFn(async(year:number)=>{
   await handleClickYear(year)
   pageParams.value.year = year === 999 ? '':year
   pageParams.value.page = 1
-  init()
 },300)
 const handleClickItem = (item:NewsItem) => {
   navigateTo({
     path: `./news/${item.id}`,
   });
 }
+watchDebounced(()=>pageParams.value.page,()=>{
+  init()
+},
+  {
+    deep:true,
+    immediate: true,
+    debounce: 10,
+    maxWait: 5000
+})
 </script>
 <style scoped>
 .hide-scrollbar::-webkit-scrollbar {
