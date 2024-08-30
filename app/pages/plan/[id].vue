@@ -3,7 +3,7 @@
     <div class="p-4 max-w-main m-auto w-full text-white text-left hidden lg:block">
       <h1 class="text-2xl sm:text-3xl md:text-4xl xl:text-7xl">{{ info?.title ?? '' }}</h1>
       <div class="mt-3 text-lg line-clamp-2">{{info?.introduction ?? ''}}</div>
-      <NuxtLink @click="handleClick" class="cursor-pointer mt-4 lg:mt-6 xl:mt-8 py-1 px-12 mx-auto text-lg leading-10 border-2 border-white hover:border-black dark:hover:border-white border-solid text-center inline-block box-border hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black transition delay-150 duration-300 ease-in-out">{{ lang[locale]['buy'] }}</NuxtLink>
+      <NuxtLink to='/product/data' @click="handleClick" class="cursor-pointer mt-4 lg:mt-6 xl:mt-8 py-1 px-12 mx-auto text-lg leading-10 border-2 border-white hover:border-black dark:hover:border-white border-solid text-center inline-block box-border hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black transition delay-150 duration-300 ease-in-out">{{ lang[locale]['buy'] }}</NuxtLink>
     </div>
   </section>
   <section class="m-auto box-border lg:px-12 px-4 py-6 bg-white text-black">
@@ -75,7 +75,7 @@
           <div class="w-full lg:px-3 box-bordermx-auto text-center">
             <div class="card-box bg-white px-3 hover:shadow-lg rounded-lg  transition delay-150 duration-300 ease-in-out">
               <img :src="item.coverImg" class="w-full aspect-[1/1] m-auto block" draggable="false" />
-              <h3 class="mt-4 text-2xl font-semibold line-clamp-1">
+              <h3 class="mt-4 text-2xl font-semibold lineOne">
               {{ item.name }}
               </h3>
               <p class="text-sm mt-3 text-gray-400">{{ item.categoryName }}</p>
@@ -115,11 +115,11 @@
               <div class="w-full lg:px-3 lg:pb-3 mx-auto text-center">
                 <div class="card-box bg-white px-3 hover:shadow-lg rounded-lg  transition delay-150 duration-300 ease-in-out">
                   <img :src="child.coverImg" class="w-full aspect-[1/1] m-auto block" draggable="false" />
-                  <h3 class="mt-4 text-2xl font-semibold line-clamp-1">
+                  <h3 class="mt-4 text-2xl font-semibold lineOne">
                   {{ child.name }}
                   </h3>
                   <p class="text-sm mt-3 text-gray-400">{{ child.categoryName }}</p>
-                  <NuxtLink to="/" class="btn text-black cursor-pointer mx-auto mt-7 mb-16 md:w-[9.75rem] leading-8 border border-black border-solid text-center inline-block box-border hover:border-primary-blue hover:bg-primary-blue hover:text-white transition delay-150 duration-300 ease-in-out">{{ planLang[locale]['plan:more'] }}</NuxtLink>
+                  <NuxtLink :to="`/details/${child.id}`" class="btn text-black cursor-pointer mx-auto mt-7 mb-16 md:w-[9.75rem] leading-8 border border-black border-solid text-center inline-block box-border hover:border-primary-blue hover:bg-primary-blue hover:text-white transition delay-150 duration-300 ease-in-out">{{ planLang[locale]['plan:more'] }}</NuxtLink>
                 </div>
               </div>
             </div>
@@ -165,7 +165,7 @@
             <div class="bg-[#F6F7F9]">
               <img :src="item.coverImg" class="w-full aspect-[22.5/12.63] m-auto block" draggable="false" />
               <div class="p-6">
-                <h3 class="text-2xl font-semibold line-clamp-1">
+                <h3 class="text-2xl font-semibold lineOne">
                 {{ item.title }}
                 </h3>
                 <p class="text-sm mt-4 text-gray-400">{{ item.countryName }}&nbsp;｜&nbsp;{{ item.district }}</p>
@@ -185,12 +185,12 @@
     </div>
   </section>
   <section class="m-auto flex-row md:flex items-center justify-center">
-    <NuxtLink click="handleClick" class="w-full md:w-1/2 flex py-10 items-center justify-center bg-[#F4F5F5] cursor-pointer">
+    <NuxtLink to='/product/data' click="handleClick" class="w-full md:w-1/2 flex py-10 items-center justify-center bg-[#F4F5F5] cursor-pointer">
       <img :src="msgImg" class="w-14 h-14 md:w-20 md:h-20 mr-4"/>
       <h4 class="text-lg md:text-[1.75rem]">{{ planLang[locale]['plan:buy'] }}</h4>
       <Icon class="md:text-lg" name="i-heroicons:chevron-right"></Icon>
     </NuxtLink>
-    <NuxtLink to="/" class="w-full md:w-1/2 flex py-10 items-center justify-center bg-[#EBEFF2] cursor-pointer">
+    <NuxtLink to="/ContactUs" class="w-full md:w-1/2 flex py-10 items-center justify-center bg-[#EBEFF2] cursor-pointer">
       <img :src="rocketImg" class="w-14 h-14 md:w-20 md:h-20 mr-4"/>
       <h4 class="text-lg md:text-[1.75rem]">{{ planLang[locale]['plan:contact'] }}</h4>
       <Icon class="md:text-lg" name="i-heroicons:chevron-right"></Icon>
