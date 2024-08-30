@@ -1,3 +1,4 @@
+import { options } from "@/.nuxt/eslint.config.mjs";
 
 export const loadFont = async ({ url, name, callback }) => {
     return new Promise(resove => {
@@ -117,21 +118,49 @@ export const parseJsonStrings = (obj) => {
 }
 
 export const downloadFile = (url, filename) => {
-    if (!url || url === "") return
-    const downloadName = filename || url.split('/').pop();  // 默认使用 URL 中的文件名
-    const a = document.createElement('a');
-    a.href = url;
-    a.target = "_blank"
-    a.download = downloadName
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    // if (!url || url === "") return
+    if (!Array.isArray(url)) {
+        useGet({
+            url: `/api/open/common/downLoadFile`,
+            params: {
+                url,
+                name: url.split('/').pop()
+            },
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+        // const {
+        //     public: { apiBase, lang },
+        // } = useRuntimeConfig()
+        // const params = {
+        //     url,
+        //     name: url.split('/').pop(),
+        //     lang
+        // }
+        // const allParams = []
+        // for (let key in params) {
+        //     const value = params[key]
+        //     if ((value !== "" && value) || value === 0) {
+        //         allParams.push(`${key}=${encodeURIComponent(value)}`)
+        //     }
+        // }
+        // window.open(`${apiBase}/api/open/common/downLoadFile?${allParams.join("&")}`)
+    }
+    // const downloadName = filename || url.split('/').pop();  // 默认使用 URL 中的文件名
+    // const a = document.createElement('a');
+    // a.href = url;
+    // a.target = "_blank"
+    // a.download = downloadName
+    // document.body.appendChild(a);
+    // a.click();
+    // document.body.removeChild(a);
 }
-const httpHandler = async ({ url, params = {}, options = {} }, handler = "get") => {
+const httpHandler = async ({ url, params = {}, options = {}, headers = {} }, handler = "get") => {
     return new Promise(resolve => {
         const message = useState("message")
         try {
-            useHttp()[handler](url, params, {}, false, options).then(res => {
+            useHttp()[handler](url, params, headers, false, options).then(res => {
                 const { code, msg } = res
                 if (!code) {
                     resolve(res)
@@ -158,6 +187,11 @@ const httpHandler = async ({ url, params = {}, options = {} }, handler = "get") 
             })
         } catch (error) {
             resolve(false)
+            throw createError({
+                statusCode: 502,
+                statusMessage: url,
+                message: 'server error',
+            });
         }
     })
 }
