@@ -154,7 +154,7 @@ const handleClickItem = (item:NewsItem) => {
     path: `./news/${item.id}`,
   });
 }
-watchDebounced(()=>pageParams.value.page,()=>{
+watchDebounced(()=>pageParams.value,()=>{
   init()
 },
   {
