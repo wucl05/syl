@@ -14,10 +14,11 @@ const fetch = (url: string, options: UseFetchOptions<T> = {}, headers: Record<st
   // 可以设置默认headers例如
   const { $i18n } = useNuxtApp()
   // const locale = $i18n.locale.value
+  const localLangue = useCookie('localLangue')
   const locale = $i18n.locale //语言响应式监听
   const customHeaders = {
     'Content-Type': 'application/json;charset=UTF-8',
-    'language': locale || lang,
+    'language':localLangue || locale || lang,
     ...headers
   };
   return new Promise((resolve, reject) => {
