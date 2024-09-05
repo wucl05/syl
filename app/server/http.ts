@@ -16,9 +16,12 @@ const fetch = (url: string, options: UseFetchOptions<T> = {}, headers: Record<st
   // const locale = $i18n.locale.value
   const localLangue = useCookie('localLangue')
   const locale = $i18n.locale //语言响应式监听
+  if (!localLangue.value) {
+    localLangue.value = locale.value || lang
+  }
   const customHeaders = {
     'Content-Type': 'application/json;charset=UTF-8',
-    'language':localLangue || locale || lang,
+    'language': localLangue,
     ...headers
   };
   return new Promise((resolve, reject) => {
