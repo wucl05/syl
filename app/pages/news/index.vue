@@ -23,7 +23,7 @@
     </nav>
     <div class="grid grid-cols-1 gap-10 pb-10 md:mt-12">
       <LiveCard
-        v-for="item in tableData.list"
+        v-for="item in tableData.data"
         :item="item"
         :key="item.id"
         :isFlex="true"
@@ -62,75 +62,31 @@ const pageParams=ref({
   // lang:locale.value,
   year:curYear.value === 999 ? '':curYear.value
 })
-const tableData = ref({
-  list:[],
-  total:0
-})
 
 const title = lang[locale.value]['links:news'];
 const emptyType = ref('empty')
-try {
-  loading.value = true
-  emptyType.value = 'empty'
-  const {total=0,data:list=[]} = await newsApi.newsList(pageParams.value);
-  loading.value = false
-  const keywords = list?.map((item:NewsItem)=>item.title).join(',')??'';
-  const description = list?.map((item:NewsItem)=>item.summary).join(',')??'';
-    useSeoMeta({
-    title: title,
-    keywords:keywords,
-    ogTitle: title,
-    description: description,
-    ogDescription: description,
-    ogImage: list?.[0]?.coverImg??banner,
-    twitterImage: list?.[0]?.coverImg??banner,
-    twitterCard: 'summary_large_image',
-  })
-  defineOgImage({
-    component: 'news',
-    title: title,
-    description: description,
-    keywords:keywords
-  })
-  console.log('list',list)
-  tableData.value = {
-    total,
-    list
-  }
-} catch (error) {
-  console.log('新闻服务异常',error)
-  loading.value = false
-  emptyType.value = 'error'
-  tableData.value = {
-    total:0,
-    list:[]
-  }
-}
-const init = async () => {
-  try {
-    loading.value = true
-    emptyType.value = 'empty'
-    const res:NewsResponseData = await fetchWithoutCookie('/api/open/news/list',{
-      params:pageParams.value,
-      method: 'GET',
-    });
-    const list = res?.data ?? [];
-    tableData.value = {
-      total:res?.total ?? 0,
-      list:list
-    }
-    loading.value = false
-  } catch (error) {
-    loading.value = false
-    emptyType.value = 'error'
-    tableData.value = {
-      total: 0,
-      list:[]
-    }
-    console.log('请求失败',error)
-  }
-}
-// init(true)
+loading.value = true
+emptyType.value = 'empty'
+const {refData:tableData} = await newsApi.newsList(pageParams.value);
+loading.value = false
+const keywords = tableData.value?.data?.map((item:NewsItem)=>item.title).join(',')??'';
+const description = tableData.value?.data?.map((item:NewsItem)=>item.summary).join(',')??'';
+  useSeoMeta({
+  title: title,
+  keywords:keywords,
+  ogTitle: title,
+  description: description,
+  ogDescription: description,
+  ogImage: tableData.value?.data?.[0]?.coverImg??banner,
+  twitterImage: tableData.value?.data?.[0]?.coverImg??banner,
+  twitterCard: 'summary_large_image',
+})
+defineOgImage({
+  component: 'news',
+  title: title,
+  description: description,
+  keywords:keywords
+})
 // 链接
 const links = [
   {
@@ -154,15 +110,6 @@ const handleClickItem = (item:NewsItem) => {
     path: `./news/${item.id}`,
   });
 }
-watchDebounced(()=>pageParams.value,()=>{
-  init()
-},
-  {
-    deep:true,
-    immediate: true,
-    debounce: 10,
-    maxWait: 5000
-})
 </script>
 <style scoped>
 .hide-scrollbar::-webkit-scrollbar {

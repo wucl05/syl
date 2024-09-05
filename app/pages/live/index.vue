@@ -31,7 +31,7 @@
       </nav>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 pb-10 md:mt-12">
         <LiveCard
-          v-for="item in tableData.list"
+          v-for="item in tableData.data"
           :item="item"
           :key="item.id"
           :isVideo="true"
@@ -70,10 +70,10 @@ const pageParams=ref({
   // lang:locale.value,
   year:curYear.value === 999 ? '':curYear.value
 })
-const tableData = ref({
-  list:[],
-  total:0
-})
+// const tableData = ref({
+//   list:[],
+//   total:0
+// })
 const tabs = ref([
   {
     label: lang[locale.value]['links:video'],
@@ -86,75 +86,60 @@ const tabs = ref([
 ])
 const title = lang[locale.value]['links:live'];
 const emptyType = ref('empty')
-try {
-  loading.value = true
-  emptyType.value = 'empty'
-  const {total=0,data:list=[]} = await liveApi.liveVideoList(pageParams.value);
-  loading.value = false
-  const keywords = list?.map((item:LiveItem)=>item.title).join(',')??'';
-  const description = `${title},${keywords}`
-    useSeoMeta({
-      title: title,
-      keywords:keywords,
-      ogTitle: title,
-      description: description,
-      ogDescription: description,
-      ogImage: list?.[0]?.coverImg??banner,
-      twitterImage: list?.[0]?.coverImg??banner,
-      twitterCard: 'summary_large_image',
-    })
-    defineOgImage({
-      component: 'live',
-      title: title,
-      description: description,
-      keywords:keywords
-    })
-  console.log('list',list)
-  tableData.value = {
-    total,
-    list
-  }
-} catch (error) {
-  console.log('直播服务异常',error)
-  loading.value = false
-  emptyType.value = 'error'
-  tableData.value = {
-    total:0,
-    list:[]
-  }
-}
-const init = async () => {
-  try {
-    loading.value = true
-    emptyType.value = 'empty'
-    const res:LiveResponseData = await fetchWithoutCookie('/api/open/live/list',{
-      params:pageParams.value,
-      method: 'GET',
-    });
-    const list = res?.data ?? [];
-    tableData.value = {
-      total:res?.total ?? 0,
-      list:list
-    }
-    loading.value = false
-  } catch (error) {
-    loading.value = false
-    emptyType.value = 'error'
-    tableData.value = {
-      total: 0,
-      list:[]
-    }
-    console.log('请求失败',error)
-  }
-}
-watchDebounced(()=>pageParams.value,()=>{
-  init()
-},
-  {
-    deep:true,
-    debounce: 100,
-    maxWait: 5000
-})
+loading.value = true
+emptyType.value = 'empty'
+const {refData:tableData}:LiveResponseData = await liveApi.liveVideoList(pageParams.value);
+loading.value = false
+const keywords = tableData.value?.data?.map((item:LiveItem)=>item.title).join(',')??'';
+const description = `${title},${keywords}`
+  useSeoMeta({
+    title: title,
+    keywords:keywords,
+    ogTitle: title,
+    description: description,
+    ogDescription: description,
+    ogImage: tableData.value?.data?.[0]?.coverImg??banner,
+    twitterImage: tableData.value?.data?.[0]?.coverImg??banner,
+    twitterCard: 'summary_large_image',
+  })
+  defineOgImage({
+    component: 'live',
+    title: title,
+    description: description,
+    keywords:keywords
+  })
+// const init = async () => {
+//   try {
+//     loading.value = true
+//     emptyType.value = 'empty'
+//     const res:LiveResponseData = await fetchWithoutCookie('/api/open/live/list',{
+//       params:pageParams.value,
+//       method: 'GET',
+//     });
+//     const list = res?.data ?? [];
+//     tableData.value = {
+//       total:res?.total ?? 0,
+//       list:list
+//     }
+//     loading.value = false
+//   } catch (error) {
+//     loading.value = false
+//     emptyType.value = 'error'
+//     tableData.value = {
+//       total: 0,
+//       list:[]
+//     }
+//     console.log('请求失败',error)
+//   }
+// }
+// watchDebounced(()=>pageParams.value,()=>{
+//   init()
+// },
+//   {
+//     deep:true,
+//     debounce: 100,
+//     maxWait: 5000
+// })
 // init(true)
 // 链接
 const links = [
