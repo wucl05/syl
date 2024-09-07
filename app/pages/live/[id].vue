@@ -14,7 +14,7 @@
       <h4 class="time mt-[.56rem] text-[#666]">{{ info?.data?.publishDate || '' }}</h4>
     </div>
     <div class="video-container flex flex-col lg:flex-row items-center justify-space-between lg:gap-10 gap-5">
-      <nuxt-link :to="info?.data?.prev?.id?`/live/${info?.data?.prev?.id}`:''" :class="['order-3 lg:order-1 prev flex flex-shrink-0 items-center justify-start 2xl:w-96 xl:w-80 lg:w-60 w-full md:pl-10 md:pr-5 md:py-4 pl-4 lg:pl-12 pr-7 py-6 ease-in-out duration-300',info?.data?.prev?.id? 'xl:hover:bg-primary-blue bg-primary-blue lg:bg-transparent cursor-pointer opacity-100' :'h-0 opacity-0']">
+      <nuxt-link :to="info?.data?.prev?.id?`/live/${info?.data?.prev?.id}`:''" :class="['order-3 lg:order-1 prev flex flex-shrink-0 items-center justify-start 2xl:w-96 xl:w-80 lg:w-60 w-full md:pl-10 md:pr-5 md:py-4 pl-4 lg:pl-12 pr-7 py-6 ease-in-out duration-300',info?.data?.prev?.id? 'lg:hover:bg-primary-blue bg-primary-blue lg:bg-transparent cursor-pointer opacity-100' :'h-0 opacity-0']">
         <div class="w-16 h-16 bg-primary-yelleow shrink-0 mr-5 2x:mr-7 flex flex-col items-center justify-center">
           <UIcon name="humbleicons:chevron-left" class="w-6 h-6 text-black"></UIcon>
         </div>
@@ -30,7 +30,7 @@
           </ClientOnly>
         </div>
       </div>
-      <nuxt-link :to="info?.data?.next?.id?`/live/${info?.data?.next?.id}`:''" :class="['order-3 lg:order-3 next flex flex-shrink-0 items-center justify-end 2xl:w-96 xl:w-80 lg:w-60 w-full pr-4 lg:pr-12 pl-7 md:pr-10 md:pl-5 md:py-4 py-6  ease-in-out duration-300',info?.data?.next?.id?'xl:hover:bg-primary-blue bg-primary-blue lg:bg-transparent cursor-pointer opacity-100':'h-0 opacity-0']">
+      <nuxt-link :to="info?.data?.next?.id?`/live/${info?.data?.next?.id}`:''" :class="['order-3 lg:order-3 next flex flex-shrink-0 items-center justify-end 2xl:w-96 xl:w-80 lg:w-60 w-full pr-4 lg:pr-12 pl-7 md:pr-10 md:pl-5 md:py-4 py-6  ease-in-out duration-300',info?.data?.next?.id?'lg:hover:bg-primary-blue bg-primary-blue lg:bg-transparent cursor-pointer opacity-100':'h-0 opacity-0']">
         <div class="w-16 h-16 bg-primary-yelleow shrink-0 ml-5 2x:ml-7 flex flex-col items-center justify-center order-2">
           <UIcon name="humbleicons:chevron-right" class="w-6 h-6 text-black"></UIcon>
         </div>

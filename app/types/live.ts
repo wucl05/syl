@@ -35,5 +35,6 @@ export interface LiveResponseData extends ResopseBase,ParsedContent {
 }
 export type LiveDetailResponseData = ResopseBase & {
   data:LiveDetail
+  refData?:Ref<LiveDetail>
 }
 

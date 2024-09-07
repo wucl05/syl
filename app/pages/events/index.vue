@@ -23,7 +23,7 @@
     </nav>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 pb-10 md:mt-12">
       <LiveCard
-        v-for="item in tableData.list"
+        v-for="item in tableData.data"
         :item="item"
         :key="item.id"
         :showInfo="false"
@@ -45,6 +45,8 @@
         </div>
       </LiveCard>
     </div>
+
+    <Empty type="emptyType" v-if="tableData.total===0 && !loading" />
     <div v-if="tableData.total>pageParams.pageSize" class="flex justify-center mb-10">
       <UPagination
         v-model="pageParams.page"
@@ -58,10 +60,9 @@
 </template>
 <script setup lang="ts">
 import { useDebounceFn } from '@vueuse/core';
-import type { EventsItem,EventsResponseData } from '~/types/events'
+import type { EventsItem } from '~/types/events'
 import banner from '~/assets/images/banner_7.jpg'
 import lang from 'locales/live'
-import { fetchWithoutCookie } from 'hooks/fetch'
 import { useYears } from 'hooks/ui/useYears'
 const { locale } = useI18n()
 const { eventsApi } = useApi();
@@ -73,66 +74,34 @@ const pageParams=ref({
   // lang:locale.value,
   year:curYear.value === 999 ? '':curYear.value
 })
-const tableData = ref({
-  list:[],
-  total:0
-})
+// const tableData = ref({
+//   list:[],
+//   total:0
+// })
 
 const title = lang[locale.value]['links:events'];
-try {
-  loading.value = true
-  const {total=0,data:list=[]} = await eventsApi.eventsList(pageParams.value);
-  loading.value = false
-  const keywords = list?.map((item:EventsItem)=>item.title).join(',')??'';
-  const description = list?.map((item:EventsItem)=>item.venue).join(',')??'';
-    useSeoMeta({
-    title: title,
-    keywords:keywords,
-    ogTitle: title,
-    description: description,
-    ogDescription: description,
-    ogImage: list?.[0]?.coverImg??banner,
-    twitterImage: list?.[0]?.coverImg??banner,
-    twitterCard: 'summary_large_image',
-  })
-  defineOgImage({
-    component: 'events',
-    title: title,
-    description: description,
-    keywords:keywords
-  })
-  console.log('list',list)
-  tableData.value = {
-    total,
-    list
-  }
-} catch (error) {
-  console.log('新闻服务异常',error)
-  tableData.value = {
-    total:0,
-    list:[]
-  }
-}
-const init = async () => {
-  try {
-    const res:EventsResponseData = await fetchWithoutCookie('/api/open/activity/list',{
-      params:pageParams.value,
-      method: 'GET',
-    });
-    const list = res?.data ?? [];
-    tableData.value = {
-      total:res?.total ?? 0,
-      list:list
-    }
-  } catch (error) {
-    tableData.value = {
-      total: 0,
-      list:[]
-    }
-    console.log('请求失败',error)
-  }
-}
-// init(true)
+loading.value = true
+const {refData:tableData}:EventsItem = await eventsApi.eventsList(pageParams.value);
+loading.value = false
+const keywords = tableData.value?.data?.map((item:EventsItem)=>item.title).join(',')??'';
+const description = tableData.value?.data?.map((item:EventsItem)=>item.venue).join(',')??'';
+  useSeoMeta({
+  title: title,
+  keywords:keywords,
+  ogTitle: title,
+  description: description,
+  ogDescription: description,
+  ogImage: tableData.value?.data?.[0]?.coverImg??banner,
+  twitterImage: tableData.value?.data?.[0]?.coverImg??banner,
+  twitterCard: 'summary_large_image',
+})
+defineOgImage({
+  component: 'events',
+  title: title,
+  description: description,
+  keywords:keywords
+})
+console.log('tableData.value?.data',tableData.value?.data)
 // 链接
 const links = [
   {
@@ -150,7 +119,7 @@ const handleClickTab = useDebounceFn(async(year:number)=>{
   await handleClickYear(year)
   pageParams.value.year = year === 999 ? '':year
   pageParams.value.page = 1
-  init()
+  // init()
 },300)
 </script>
 <style scoped>

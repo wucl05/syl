@@ -8,6 +8,6 @@ export type EventsItem = Pick<LiveDetail, 'title' | 'id' | 'coverImg'> & {
   endDateEn:string,
 }
 type ResopseBase = Pick<LiveDetailResponseData, 'code' | 'msg' | 'pages' | 'total' >
-export type NewsResponseData = ResopseBase & {
+export type EventsResponseData = ResopseBase & {
   data:EventsItem[]
 }

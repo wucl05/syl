@@ -79,7 +79,7 @@ const links = [
 const loading = ref(false)
 const pageParams=ref({
   page:1,
-  pageSize:1,
+  pageSize:6,
   key: '',
   countryId: '', // 国家id
   districtId: '', // 区域Id
