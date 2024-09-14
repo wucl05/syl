@@ -6,16 +6,16 @@
     @keydown.right="currentTime += 10"
     @keydown.left="currentTime -= 10">
 
-    <div class="m-auto box-border bg-gray-50 dark:bg-black py-2 lg:px-12 px-5">
+    <div class="m-auto box-border bg-gray-50 dark:bg-white py-2 lg:px-12 px-5">
       <UBreadcrumb class="max-w-main m-auto" :links="links" :ui="{
         divider: {
-          base: 'flex-shrink-0 w-5 h-5 rtl:rotate-180 text-black dark:text-white sm:opacity-70',
+          base: 'flex-shrink-0 w-5 h-5 rtl:rotate-180 text-black dark:text-black sm:opacity-70',
         },
       }" >
       </UBreadcrumb>
     </div>
     <div class="max-w-main m-auto text-center py-14 ">
-      <h1 class="text-4xl font-bold text-[#222] dark:text-white">{{ info?.data?.title || '' }}</h1>
+      <h1 class="text-4xl font-bold text-[#222] dark:text-black">{{ info?.data?.title || '' }}</h1>
       <h4 class="time mt-[.56rem] text-[#666]">{{ info?.data?.publishDate || '' }}</h4>
     </div>
     <div class="video-container flex flex-col lg:flex-row items-center justify-space-between lg:gap-10 gap-5">
@@ -62,12 +62,12 @@ console.log('route',route.name)
 const links = [
   {
     label: lang[locale.value]['links:home'],
-    labelClass:'text-black dark:text-white',
+    labelClass:'text-black dark:text-black',
     to: '/'
   },
   {
     label: lang[locale.value]['links:video'],
-    labelClass:'text-black dark:text-white',
+    labelClass:'text-black dark:text-black',
     to: '/video'
   },
 ]
