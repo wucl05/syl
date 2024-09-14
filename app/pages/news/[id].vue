@@ -1,33 +1,33 @@
 <template>
-  <div class="outline-none">
-    <div class="m-auto box-border bg-gray-50 dark:bg-black py-2 lg:px-12 px-5">
-      <UBreadcrumb class="max-w-main m-auto" :links="links" :ui="{
+  <div class="outline-none bg-white">
+    <div class="m-auto box-border bg-gray-50 dark:bg-white py-2 lg:px-12 px-5">
+      <MUIBreadcrumb type="dark" class="max-w-main m-auto" :links="links" :ui="{
         divider: {
-          base: 'flex-shrink-0 w-5 h-5 rtl:rotate-180 text-black dark:text-white sm:opacity-70',
+          base: 'flex-shrink-0 w-5 h-5 rtl:rotate-180 text-black dark:text-black sm:opacity-70',
         },
       }" >
-      </UBreadcrumb>
+      </MUIBreadcrumb>
     </div>
     <div class="max-w-main m-auto text-center py-8 sm:py-10 lg:py-14 ">
-      <h1 class="text-4xl font-bold text-[#222] dark:text-white">{{ info.title }}</h1>
+      <h1 class="text-4xl font-bold text-[#222] dark:text-black">{{ info.title }}</h1>
       <h4 class="time mt-[.56rem] text-[#666]">{{ locale !== 'cn' ? info.publishDateEn : info.publishDate }}</h4>
     </div>
     <div class="video-container flex flex-col lg:flex-row items-center justify-space-between lg:gap-10 gap-5">
-      <nuxt-link class="lg:fixed lg:top-[50%] lg:mt-[-32px]" :to="info.prev.id?`/news/${info.prev.id}`:''" :class="['order-3 lg:order-1 prev flex flex-shrink-0 items-center justify-start 2xl:w-96 xl:w-80 lg:w-60 w-full md:pl-10 md:pr-5 md:py-4 pl-4 lg:pl-12 pr-7 py-6 ease-in-out duration-300',info?.prev?.id? 'lg:hover:bg-primary-blue bg-primary-blue lg:bg-transparent cursor-pointer opacity-100' :'h-0 opacity-0']">
+      <nuxt-link class="lg:fixed lg:top-[50%] lg:mt-[-32px]" :to="info.prev.id?`/news/${info.prev.id}`:''" :class="['order-3 lg:order-1 prev flex flex-shrink-0 items-center justify-start 2xl:w-96 xl:w-80 lg:w-60 w-full md:pl-10 md:pr-5 md:py-4 pl-4 lg:pl-12 pr-7 py-6 ease-in-out duration-300',info?.prev?.id? ' bg-primary-blue lg:bg-transparent cursor-pointer opacity-100' :'h-0 opacity-0']">
         <div class="w-16 h-16 bg-primary-yelleow shrink-0 mr-5 2x:mr-7 flex flex-col items-center justify-center">
-          <UIcon name="humbleicons:chevron-left" class="w-6 h-6 text-black"></UIcon>
+          <UIcon name="humbleicons:chevron-right" class="w-6 h-6 text-black rotate-180"></UIcon>
         </div>
-        <div class="child line-clamp-2 break-words text-white">{{info.prev.title}}</div>
+        <!-- <div class="child line-clamp-2 break-words text-white">{{info.prev.title}}</div> -->
       </nuxt-link>
-      <div class="max-w-[55.75rem] m-auto flex-1 px-4 lg:px-0 content order-2 lg:order-2">
+      <div class="max-w-[55.75rem] m-auto flex-1 pb-[84px] px-4 lg:px-0 content order-2 lg:order-2">
         <article v-html="info?.content ?? ''">
         </article>
       </div>
-      <nuxt-link class="lg:fixed lg:top-[50%] lg:right-[0px] lg:mt-[-32px]" :to="info.next.id?`/news/${info.next.id}`:''" :class="['order-3 lg:order-3 next flex flex-shrink-0 items-center justify-end 2xl:w-96 xl:w-80 lg:w-60 w-full pr-4 lg:pr-12 pl-7 md:pr-10 md:pl-5 md:py-4 py-6  ease-in-out duration-300',info?.next?.id?'lg:hover:bg-primary-blue bg-primary-blue lg:bg-transparent cursor-pointer opacity-100':'h-0 opacity-0']">
+      <nuxt-link class="lg:fixed lg:top-[50%] lg:right-[0px] lg:mt-[-32px]" :to="info.next.id?`/news/${info.next.id}`:''" :class="['order-3 lg:order-3 next flex flex-shrink-0 items-center justify-end 2xl:w-96 xl:w-80 lg:w-60 w-full pr-4 lg:pr-12 pl-7 md:pr-10 md:pl-5 md:py-4 py-6  ease-in-out duration-300',info?.next?.id?' bg-primary-blue lg:bg-transparent cursor-pointer opacity-100':'h-0 opacity-0']">
         <div class="w-16 h-16 bg-primary-yelleow shrink-0 ml-5 2x:ml-7 flex flex-col items-center justify-center order-2">
           <UIcon name="humbleicons:chevron-right" class="w-6 h-6 text-black"></UIcon>
         </div>
-        <div class="child line-clamp-2 break-words text-white order-1">{{info.next.title}}</div>
+        <!-- <div class="child line-clamp-2 break-words text-white order-1">{{info.next.title}}</div> -->
       </nuxt-link>
     </div>
   </div>
@@ -43,17 +43,17 @@ console.log('route',route.name)
 const links = [
   {
     label: lang[locale.value]['links:home'],
-    labelClass:'text-black dark:text-white',
+    labelClass:'text-black dark:text-black',
     to: '/'
   },
   {
     label: lang[locale.value]['links:news'],
-    labelClass:'text-black dark:text-white',
+    labelClass:'text-black dark:text-black',
     to: '/news'
   },
   {
     label: lang[locale.value]['links:newsDetail'],
-    labelClass:'text-black dark:text-white opacity-70',
+    labelClass:'text-black dark:text-black opacity-70',
   }
 ]
 const title =ref('');
