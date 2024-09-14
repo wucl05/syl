@@ -1,34 +1,5 @@
 ﻿export default {
     en: {
-        links: [{
-            label: 'AbouteMe',
-            value: '/aboute'
-        }, 
-        {
-            label: 'Service',
-            value: '/service'
-        },
-        {
-            label: 'News and Events',
-            value: '/news'
-        },
-        {
-            label: 'Contact Us',
-            value: '/contactUs'
-        }
-        ],
-        entrance: [
-            {
-                label: "EMS Platform",
-                value: "ems",
-                icon: "heroicons-solid:envelope"
-            },
-            {
-                label: "Live Stream",
-                value: "/live",
-                icon: "heroicons-solid:eye"
-            }
-        ],
         menus: [
             {
                 title: "About Us",
@@ -108,29 +79,23 @@
                 ]
             }
         ],
+        version: "© Copyright 2024 SYL (Ningbo) Battery Co., Ltd. ICP License No.: Zhe ICP XXXXXXX-1",
+        links: [
+            {
+                name: "EMS Platform",
+                page: "/"
+            },
+            {
+                name: "Live Stream",
+                page: "/live"
+            },
+            {
+                name: "Privacy policy",
+                page: "/privacy"
+            }
+        ]
     },
     cn: {
-        links: [{
-            label: '关于我们',
-            value: '/aboutUs',
-            icon: "heroicons-solid:building-library"
-        }, 
-        {
-            label: '服务与支持',
-            value: '/service',
-            icon: "heroicons-solid:check-badge"
-        },
-        {
-            label: '新闻与活动',
-            value: '/news',
-            icon: "heroicons-solid:document-text"
-        },
-        {
-            label: '联系我们',
-            value: '/contactUs',
-            icon: "heroicons-solid:device-phone-mobile"
-        }
-        ],
         menus: [
             {
                 title: "关于我们",
@@ -210,18 +175,20 @@
                 ]
             }
         ],
-        entrance: [
+        version: "© Copyright 2024 双一力（宁波）电池有限公司 备案号：浙ICP备XXXXXX号-1号",
+        links: [
             {
-                label: "EMS平台",
-                value: "ems",
-                icon: "heroicons-solid:envelope"
+                name: "EMS平台",
+                page: "/"
             },
             {
-                label: "线上直播",
-                value: "/live",
-                icon: "heroicons-solid:eye"
+                name: "线上直播",
+                page: "/live"
+            },
+            {
+                name: "隐私政策",
+                page: "/privacy"
             }
         ]
     },
 }
-

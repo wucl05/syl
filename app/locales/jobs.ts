@@ -2,7 +2,7 @@ export default {
   en: {
     "jobs":{
       "section1":{
-        "title":"Eine breite Entwicklungsplattform",
+        "title":"A broad platform for development",
         "list":[
           "Provide various types of domestic project practice opportunities to exercise and grow in real environments;",
           "Learn and apply advanced technology, keep up with the forefront of the industry, and enhance professional skills;",
@@ -12,8 +12,8 @@ export default {
       "section2":{
         "title":"Comprehensive training system",
         "list":[
-          "During the probationary period, provide guidance from a mentor to help quickly adapt and integrate into the team;",
-          "Risheng Cloud Classroom provides an interactive learning platform that combines online and offline learning, allowing users to access the latest knowledge anytime, anywhere;",
+          "During the internship, there is a mentor to help you adapt quickly and integrate into the team;",
+          "Risen Cloud Classroom provides an interactive learning platform that combines online and offline learning, allowing users to access the latest knowledge anytime, anywhere;",
           "Multi level and multi business comprehensive training to enhance overall abilities and adapt to the needs of different functions and positions."
           ],
       },

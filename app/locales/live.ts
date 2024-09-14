@@ -1,9 +1,9 @@
 export default {
   en: {
-      "links:home":'Home',
+      "links:home":'Home page',
       "links:live":'Live',
-      "links:video":'Video',
-      "links:news":'News and Events',
+      "links:video":'Live Stream',
+      "links:news":'Exhibitions and Events',
       "links:newsDetail":'Company News',
       "links:events":'Events',
       "links:events:date":'Events Date',
@@ -11,12 +11,16 @@ export default {
       "links:events:no":'Events No',
       "links:jobs":'Join Us',
       "links:privacy":'Privacy',
-      "buy":'purchased product',
-      "years":'All'
+      "buy":'Learn more',
+      "years":'All',
+      "title":"video live",
+      "productTitle":"Project Alternatives",
+      companyNews:"Company News"
   },
   cn: {
     "links:home":'首页',
     "links:live":'直播',
+    "title":"视频直播",
     "links:video":'视频',
     "links:news":'新闻与活动',
     "links:newsDetail":'企业新闻',
@@ -26,8 +30,10 @@ export default {
     "links:events:no":'展会号',
     "links:jobs":'加入我们',
     "links:privacy":'隐私政策',
-    "buy":'购买产品',
-    "years":'全部'
+    "buy":'了解更多',
+    "years":'全部',
+    "productTitle":"项目案例",
+    companyNews:"公司新闻"
   },
   ja: {
     "links:home":'トップページ',
