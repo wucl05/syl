@@ -1,14 +1,10 @@
 <template>
-  <div class="m-auto box-border bg-gray-50 dark:bg-black py-2 lg:px-12 px-5">
-    <UBreadcrumb class="max-w-main m-auto" :links="links" :ui="{
-      divider: {
-        base: 'flex-shrink-0 w-5 h-5 rtl:rotate-180 text-black dark:text-white sm:opacity-70',
-      },
-    }" >
-    </UBreadcrumb>
+  <div class="m-auto box-border bg-gray-50 dark:bg-white py-2 lg:px-12 px-5">
+    <MUIBreadcrumb type="dark" class="max-w-main m-auto" :links="links">
+    </MUIBreadcrumb>
   </div>
   <div class="max-w-main m-auto pt-14 xl:pt-16 px-4 xl:px-0">
-    <h1 class="text-2xl mb-8 lg:text-[2.75rem] text-center font-semibold">{{ casesLang[locale]['cases:title'] }}</h1>
+    <h1 class="text-[28px] lg:text-[36px] mb-8 text-center font-semibold">{{ casesLang[locale]['cases:title'] }}</h1>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 pb-8">
       <UInput
         icon="i-heroicons-magnifying-glass-20-solid"
@@ -68,12 +64,12 @@ const { id='' } = route.query;
 const links = [
   {
     label: lang[locale.value]['links:home'],
-    labelClass:'text-black dark:text-white',
+    labelClass:'text-black dark:text-black',
     to: '/'
   },
   {
     label: casesLang[locale.value]['cases:title'],
-    labelClass:'text-black opacity-70 dark:text-white',
+    labelClass:'text-black opacity-70 dark:text-black',
   }
 ]
 const loading = ref(false)
@@ -83,7 +79,7 @@ const pageParams=ref({
   key: '',
   countryId: '', // 国家id
   districtId: '', // 区域Id
-  solutionId: id ?? ''
+  solutionId: ''
 })
 const tableData = ref({
   list:[],
@@ -169,7 +165,7 @@ if(productArr.length && id){
   if(item){
     links.splice(1,0,{
       label: item.name,
-      labelClass:'text-black dark:text-white',
+      labelClass:'text-black dark:text-black',
       to: `/plan/${item.value}`
     })
   }
